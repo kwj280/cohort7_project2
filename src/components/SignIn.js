@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from 'axios'
 
 
 function Copyright(props) {
@@ -27,14 +29,23 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    axios.post('/user/signIn',{
+      inputs
+    })
+    .then(function (response) {
+      console.log(response);
+    })
   };
 
   return (
@@ -65,6 +76,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={inputs.email || ""} 
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -75,6 +88,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={inputs.password || ""} 
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

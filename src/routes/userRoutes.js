@@ -1,11 +1,7 @@
 const express = require('express')
-const userModel = require('../model/models')
+const {userModel, addUser, signIn} = require('../model/user')
 const app = express()
 
-// app.get('/express_backend', (req, res) => {
-
-//   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' })
-// })
 
 // create a GET route
 app.get('/users', async (req, res) => {
@@ -18,16 +14,23 @@ app.get('/users', async (req, res) => {
   }
 })
 
+
 // create a POST route
 app.post('/add_user', async (req, res) => {
-  const user = new userModel(req.body)
+  let userInfo = req.body.inputs;
+  if(await addUser(userInfo))
+    res.status(200).send('Successful')
+  else
+    res.status(500).send('Failed')
 
-  try {
-    await user.save()
-    res.send(user)
-  } catch (error) {
-    re.status(500).send(error)
-  }
 })
+
+app.post('/signIn', async (req, res) => {
+  let userInfo = req.body.inputs;
+  let user = await signIn(userInfo)
+  res.send(user)
+})
+
+
 
 module.exports = app

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios'
 
 function Copyright(props) {
   return (
@@ -26,15 +28,25 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
 export default function SignUp() {
+
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    axios.post('/user/add_user',{
+      inputs
+    })
+    .then(function (response) {
+      console.log(response);
+    })
   };
 
   return (
@@ -65,6 +77,8 @@ export default function SignUp() {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  value={inputs.firstName || ""} 
+                  onChange={handleChange}
                   autoFocus
                 />
               </Grid>
@@ -75,6 +89,8 @@ export default function SignUp() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
+                  value={inputs.lastName || ""} 
+                  onChange={handleChange}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -85,6 +101,8 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  value={inputs.email || ""} 
+                  onChange={handleChange}
                   autoComplete="email"
                 />
               </Grid>
@@ -96,6 +114,8 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
+                  value={inputs.password || ""} 
+                  onChange={handleChange}
                   autoComplete="new-password"
                 />
               </Grid>

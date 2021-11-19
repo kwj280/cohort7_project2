@@ -44,7 +44,7 @@ export default function SignIn() {
       inputs
     })
     .then(function (response) {
-      console.log(response);
+      console.log(response.data);
     })
   };
 

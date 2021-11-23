@@ -13,71 +13,76 @@ const mongoose = require('mongoose')
 */
 const profileSchema = new mongoose.Schema({
     userId: {
-      type: mongoose.Schema.Types.ObjectId, ref: 'User'
-	},
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     prfile_picture: {
-      type: Buffer,
+        type: Buffer,
     },
     skills: {
-      type: [String],
+        type: [String],
     },
     interest: {
-      type: [String],
+        type: [String],
     },
     resume: {
-      type: Buffer,
+        type: Buffer,
     },
     linkGit: {
-      type: String,
+        type: String,
     },
     linkLinkedIn: {
-      type: String,
+        type: String,
     },
-  })
+})
 
 const profileModel = mongoose.model('Profile', profileSchema)
 
 
 //create new Profile
-const createProfile = async(profileInfo) => {
-  console.log('profileInfo: ', profileInfo)
-  let profile = new profileModel(profileInfo)
-  console.log('profile: ', profile)
-  try {
-    await profile.save()
-    return true
-  } catch (error) {
-    console.error(error)
-    return false
-  }
+const createProfile = async (profileInfo) => {
+    let profile = new profileModel(profileInfo)
+    try {
+        await profile.save()
+        return profile
+    } catch (error) {
+        console.error(error)
+        return false
+    }
 }
 
 //get Profile by Profile id
-const getProfileByProfileId = async(profile_id) => {
-	return true
+const getProfileByProfileId = async (profile_id) => {
+    return true;
 }
 
 //get Profile by user id
-const getProfileByUserId = async(user_id) => {
-	return true
+const getProfileByUserId = async (userId) => {
+    return profileModel.findOne({ userId }).exec();
 }
 
 // update Profile
-const updateProfile = async(newProfile) => {
-	return true
+const updateProfile = (newProfile, callback) => {
+    profileModel.findByIdAndUpdate(newProfile._id, newProfile, {new : true }, (err, model)=>{
+      if(err){
+        console.error(err.message)
+        return false;
+      }
+      callback(model);
+    })
 }
 
 
 // delete Profile
-const deleteProfile = async(profile_id) => {
-	return true
+const deleteProfile = async (profile_id) => {
+    return true
 }
 
 
-module.exports={
-	createProfile,
-	getProfileByProfileId,
-	getProfileByUserId,
-	updateProfile,
-	deleteProfile
+module.exports = {
+    createProfile,
+    getProfileByProfileId,
+    getProfileByUserId,
+    updateProfile,
+    deleteProfile
 }

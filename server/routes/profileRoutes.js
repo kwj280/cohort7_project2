@@ -10,45 +10,50 @@ const app = express()
 
 let testProfileJson = {
     userId: '6195f25f0b944fa89fe45ca6',
-    skills: ['C++', 'Javascript', 'Frontend dveleopemnt'],
+    skills: ['C++', 'Javascript', 'Frontend dveleopemnt2'],
     interest: ['Machine learnoing']
 }
-
-
-
-
 
 
 /* @auther: Woojae Kim
  create a new profile for user
   param: same as profile schema
-  return: true if suceed false otherwise
+  return: status 200 and created profile if successful, status 500 otherwise
 */
 app.post('/create', async (req, res) => {
 
-    createProfile(testProfileJson)
-    return true;
+    let pofile = await createProfile(testProfileJson)
+    if(!pofile)
+        res.status(500).send('failed to create')
+    res.status(200).send(pofile)
+
 })
 
-/* @auther: Woojae Kim
- update existing profile 
-  param: profile id to update
-  return: true if suceed false otherwise
+/* 
+  @auther: Woojae Kim
+  @test: curl -X POST http://localhost:5000/profile/update -H 'Content-Type: application/json' -d '{"_id": "619c059592a570bf8451d8b1", "userId": "6195f25f0b944fa89fe45ca6","skills": ["update"],"interest": ["testUpdate"]}'
+  update existing profile 
+  param: new profile 
+  return: updated profile model
 */
-app.post('/update/:profile_id', async (req, res) => {
-
-    createProfile(testProfileJson)
-    return true;
+app.post('/update', async (req, res) => {
+    let profile = req.body
+    updateProfile(profile, (updatedModel)=>{
+        res.status(200).send(updatedModel)
+    })
 })
 
 
 /* @auther: Woojae Kim
- get user profile using userId
+   get user profile using userId
   param: user id
   return: profile object
 */
 app.get('/getByUserId/:userId', async (req, res) => {
-    return true;
+    let userId = req.params.userId
+    console.log(userId)
+    let profile = await getProfileByUserId(userId)
+    res.status(200).send(profile)
 })
 
 /* @auther: Brian

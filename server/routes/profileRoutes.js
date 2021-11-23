@@ -15,7 +15,7 @@ let testProfileJson = {
 }
 
 
-/* @auther: Woojae Kim
+/* @author: Woojae Kim
  create a new profile for user
   param: same as profile schema
   return: status 200 and created profile if successful, status 500 otherwise
@@ -30,7 +30,7 @@ app.post('/create', async (req, res) => {
 })
 
 /* 
-  @auther: Woojae Kim
+  @author: Woojae Kim
   @test: curl -X POST http://localhost:5000/profile/update -H 'Content-Type: application/json' -d '{"_id": "619c059592a570bf8451d8b1", "userId": "6195f25f0b944fa89fe45ca6","skills": ["update"],"interest": ["testUpdate"]}'
   update existing profile 
   param: new profile 
@@ -44,7 +44,7 @@ app.post('/update', async (req, res) => {
 })
 
 
-/* @auther: Woojae Kim
+/* @author: Woojae Kim
    get user profile using userId
   param: user id
   return: profile object
@@ -56,7 +56,7 @@ app.get('/getByUserId/:userId', async (req, res) => {
     res.status(200).send(profile)
 })
 
-/* @auther: Brian
+/* @author: Brian
  get user profile using profileId
   param: profile id
   return: profile object
@@ -66,7 +66,7 @@ app.get('/getByProfileId/:profileId', async (req, res) => {
 })
 
 
-/* @auther: Brian
+/* @author: Brian
  delete profile
   param: profile id
 return: true if suceed false otherwise

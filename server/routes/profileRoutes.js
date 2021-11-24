@@ -10,8 +10,8 @@ const app = express()
 
 let testProfileJson = {
     userId: '6195f25f0b944fa89fe45ca6',
-    skills: ['C++', 'Javascript', 'Frontend dveleopemnt2'],
-    interest: ['Machine learnoing']
+    skills: ['C++', 'Javascript', 'Frontend development2'],
+    interest: ['Machine learning']
 }
 
 
@@ -22,10 +22,10 @@ let testProfileJson = {
 */
 app.post('/create', async (req, res) => {
 
-    let pofile = await createProfile(testProfileJson)
-    if(!pofile)
+    let profile = await createProfile(testProfileJson)
+    if(!profile)
         res.status(500).send('failed to create')
-    res.status(200).send(pofile)
+    res.status(200).send(profile)
 
 })
 
@@ -36,7 +36,7 @@ app.post('/create', async (req, res) => {
   param: new profile 
   return: updated profile model
 */
-app.post('/update', async (req, res) => {
+app.post('/update', (req, res) => {
     let profile = req.body
     updateProfile(profile, (updatedModel)=>{
         res.status(200).send(updatedModel)
@@ -69,7 +69,7 @@ app.get('/getByProfileId/:profileId', async (req, res) => {
 /* @author: Brian
  delete profile
   param: profile id
-return: true if suceed false otherwise
+return: true if succeed false otherwise
 
 */
 app.delete('/:profile_id', async (req, res) => {

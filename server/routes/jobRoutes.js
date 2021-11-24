@@ -1,14 +1,17 @@
 const express = require('express')
 const router = express.Router()
 
-const jobsModel = require('../models/job')
+const jobsModel = require('../model/job')
 
-router.get('/jobs', async (req, res) => {
-    let jobList = await jobsModel.getJobByJobId()
-    res.send(jobList)
+//@test curl -X POST http://localhost:5000/job/create -H 'Content-Type: application/json' -d '{"title": "software developer", "description" : "develop things"}'
+router.post('/create', async (req, res) => {
+    // let jobList = await jobsModel.getJobByJobId()
+    // res.send(jobList)
+    console.log(req.body)
+    res.send(req.body)
 })
 
-router.get('/jobs/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     let id = req.params.id
     let jobs = await jobsModel.getJobByJobId(id)
     res.send(jobs)

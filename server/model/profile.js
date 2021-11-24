@@ -16,7 +16,7 @@ const profileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    prfile_picture: {
+    profile_picture: {
         type: Buffer,
     },
     skills: {

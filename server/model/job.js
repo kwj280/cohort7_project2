@@ -1,53 +1,47 @@
 const mongoose = require('mongoose')
 
-const jobSchema = new mongoose.Schema(
-  { title: {
+const jobSchema = new mongoose.Schema({
+  title: {
     type: String,
     trim: true,
-    required:[true,' Please enter job title'],
+    required: [true, ' Please enter job title'],
   },
   description: {
     type: String,
     trim: true,
-    required:[true,' Please enter job description'],
+    required: [false, ' Please enter job description'],
   },
   skills: {
     type: [String],
-    required: true,
+    required: false,
+    message: 'Please enter applicable skills',
   },
-  message: "Please enter applicable skills",
+  
   company: {
     type: String,
     trim: true,
-    required: [true, "Please enter company name"],
+    required: [false, 'Please enter company name'],
   },
   availability: {
-    type: String,
-    required: true,
+    type: Boolean,
+    required: false,
   },
   expiryDate: {
     type: String,
-    required: true,
+    required: false,
   },
   link: {
-    type: [email,company_site],
-    required: true,
-  },
- 
-  
-timestamps: {
-   type: Date
+    type: String,
   },
 
-  })
+  timestamps: {
+    type: Date,
+  },
+})
 
-const jobModel = mongoose.model("Job", jobSchema)
-  
-export default jobModel
+const jobModel = mongoose.model('Job', jobSchema)
 
 
-  
-  
 
 /*  
 Job Title,
@@ -60,49 +54,59 @@ Link[Company email, Company site]
 
 */
 
-
-
-
-
 // create new job
 const addJob = async (jobInfo) => {
   console.log('jobInfo: ', jobInfo)
-  let Jobs = new jobModel(jobInfo)
-  console.log('job: ', job)
+  let Job = new jobModel(jobInfo)
+  console.log('job: ', Job)
   try {
-    await Jobs.save()
-    return true
+    await Job.save()
+    return job._id
   } catch (error) {
     console.error(error)
     return false
   }
 }
-
+// get job object from db
 //getJob by Job id
 const getJobByJobId = async (job_id) => {
   return true
 }
 
-//get Profile by user id
-const getJobByUserId = async (user_id) => {
+
+//get Jobs by user id
+const getJobsByUserId = async (user_id) => {
   return true
 }
 
-// update Profile
-const updateJob = async (newJob) => {
+// get Jobs by search query this using 3rd party API
+
+const getJobs = async (user_id) => {
   return true
 }
 
-// delete Profile
+// update Jobs
+const updateJob = async (updatedJob) => {
+  return true
+}
+
+// delete Jobs
 const deleteJob = async (job_id) => {
   return true
 }
 
+// getJobById return a single job
+const getJobById = async (job_id) => {
+  return jobModel.findById(job_id)
+}
+
 module.exports = {
   getJobByJobId,
-  getJobByUserId,
+  getJobById,
+  getJobsByUserId,
+  getJobs,
   updateJob,
   deleteJob,
   jobModel,
-  addJob
+  addJob,
 }

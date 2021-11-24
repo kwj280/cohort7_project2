@@ -67,7 +67,7 @@ app.get("/getByProfileId/:profileId", async (req, res) => {
 /* @author: Brian
  delete profile
   param: profile id
-return: true if suceed false otherwise
+return: true if succeed false otherwise
 
 */
 app.delete("/:profile_id", async (req, res) => {

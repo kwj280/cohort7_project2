@@ -1,8 +1,5 @@
 import '../App.css'
-import SearchIcon from '@material-ui/icons/Search'
-import Header from './Header'
 import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
 const JobsPage = () => {
   return (
     <>

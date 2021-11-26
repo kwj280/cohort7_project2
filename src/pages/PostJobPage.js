@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import SignUp from '../components/SignUp';
+import JobForm from '../components/JobForm'
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -11,23 +11,23 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ProfilePage() {
+export default function PostJobPage() {
   const classes = useStyles();
 
   const theme = useTheme();
   return (
     <>
+      <CssBaseline />
       <Container maxWidth={'xl'} >
         <Paper elevation={3} className={classes.content}
-         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }} >
-
-          <h1>Profile Component here</h1>
-          <SignUp/>
-          </Paper>
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }} >
+          <h1>Job form</h1>
+          <JobForm />
+        </Paper>
       </Container>
     </>
   )

@@ -2,7 +2,6 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import SignUp from '../components/SignUp';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -11,12 +10,13 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ProfilePage() {
+export default function MyApplicationPage() {
   const classes = useStyles();
 
   const theme = useTheme();
   return (
     <>
+    <CssBaseline/>
       <Container maxWidth={'xl'} >
         <Paper elevation={3} className={classes.content}
          sx={{
@@ -25,8 +25,7 @@ export default function ProfilePage() {
           alignItems: 'center',
         }} >
 
-          <h1>Profile Component here</h1>
-          <SignUp/>
+          <h1>My applications components here</h1>
           </Paper>
       </Container>
     </>

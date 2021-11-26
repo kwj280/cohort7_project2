@@ -12,6 +12,7 @@ import MainLayout from './pages/MainLayout'
 
 
 
+import JobForm from './components/JobForm'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <MainLayout />
       {/* <Routes>
         <Route path="/" element={<JobsPage />} />
+<<<<<<< HEAD
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/my_applications" element={<JobsPage />} />
@@ -31,6 +33,8 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/signIn" element={<SignIn />} />
       </Routes> */}
+      <JobForm/>
+
       <Footer />
 
     </>

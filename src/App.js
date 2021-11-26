@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 // import logo from './logo.svg';
 import './App.css'
 import { Routes, Route, Link } from 'react-router-dom'
@@ -10,14 +10,16 @@ import JobForm from './components/JobForm'
 
 function App() {
   return (
-    <div className="App">
+    <>
+      <Header />
+
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<JobsPage />} />
         <Route path="signUp" element={<SignUp />} />
         <Route path="signIn" element={<SignIn />} />
       </Routes>
       <JobForm/>
-    </div>
+    </>
   )
 }
 

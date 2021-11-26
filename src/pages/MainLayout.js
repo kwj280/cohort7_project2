@@ -3,7 +3,6 @@ import { styled, useTheme } from '@mui/material/styles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Box from '@mui/material/Box';
-
 import CssBaseline from '@mui/material/CssBaseline';
 import SideNavBar from '../components/SideNavBar';
 import MainContentBody from './MainContentBody';

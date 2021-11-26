@@ -1,7 +1,6 @@
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import JobForm from '../components/JobForm'
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +16,6 @@ export default function PostJobPage() {
   const theme = useTheme();
   return (
     <>
-      <CssBaseline />
       <Container maxWidth={'xl'} >
         <Paper elevation={3} className={classes.content}
           sx={{

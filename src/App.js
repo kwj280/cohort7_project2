@@ -5,6 +5,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
+import JobForm from './components/JobForm'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="signUp" element={<SignUp />} />
         <Route path="signIn" element={<SignIn />} />
       </Routes>
+      <JobForm/>
     </div>
   )
 }

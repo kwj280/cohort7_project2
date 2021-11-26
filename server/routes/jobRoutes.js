@@ -14,5 +14,10 @@ router.get('/jobs/:id', async (req, res) => {
     res.send(jobs)
 })
 
+router.post('/jobs/submit', async (req, res) => {
+    let job = req.body
+    // need to create CreateJob function for job postings
+})
+
 
 module.exports = router

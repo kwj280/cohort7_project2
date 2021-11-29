@@ -1,12 +1,18 @@
 import React from 'react'
 // import logo from './logo.svg';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import './App.css'
 import MainLayout from './pages/MainLayout'
+
+const theme = createTheme();
 
 function App() {
   return (
     <>
-      <MainLayout />
+      <ThemeProvider theme={theme}>
+        <MainLayout />
+      </ThemeProvider>
     </>
   )
 }

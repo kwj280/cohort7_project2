@@ -18,7 +18,7 @@ app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
 
 mongoose.connect(
-  'mongodb+srv://Techn0mancer_X:Epsilon_6@cluster0.zapao.mongodb.net/techConnect?retryWrites=true&w=majority',
+  'mongodb://localhost:27017/techConnect',
   {
     useNewUrlParser: true,
   },

@@ -192,7 +192,7 @@ const JobForm2 = ({handleClose}) => {
           helperText={LinkisInvalid ? "Enter Link" : null}
         />
         <div>
-    <Button variant="contained" color='secondary'>
+    <Button variant="contained" color='secondary' onClick={reset}>
       Cancel
     </Button>
     <Button onClick={handleSubmit} type="Submit" variant="contained" color="primary" disabled={!formIsValid}>

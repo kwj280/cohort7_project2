@@ -5,10 +5,12 @@ import JobForm from '../components/JobForm'
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
   },
 
 }));
+
+
 
 export default function PostJobPage() {
   const classes = useStyles();

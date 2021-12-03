@@ -17,12 +17,9 @@ app.use('/user', userRouter)
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
 
-mongoose.connect(
-  'mongodb://localhost:27017/techConnect',
-  {
-    useNewUrlParser: true,
-  },
-)
+mongoose.connect('mongodb://localhost:27017/techConnect/users', {
+  useNewUrlParser: true,
+})
 
 //db connection
 const db = mongoose.connection

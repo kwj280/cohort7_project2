@@ -1,7 +1,10 @@
+
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import SignUp from '../components/SignUp';
+import SignIn from '../components/SignIn';
+import ProfileForm from '../components/ProfileForm'
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -10,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ProfilePage() {
+export default function ProfilePage({setUser, user}) {
   const classes = useStyles();
-
   const theme = useTheme();
   return (
     <>
@@ -25,7 +27,9 @@ export default function ProfilePage() {
         }} >
 
           <h1>Profile Component here</h1>
-          <SignUp/>
+          {/* {!user&&<SignIn setUser={setUser}/>} */}
+          {!user && <ProfileForm/>}
+
           </Paper>
       </Container>
     </>

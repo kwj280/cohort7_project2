@@ -28,7 +28,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({setUser}) {
 
   const [inputs, setInputs] = useState({});
 
@@ -44,7 +44,8 @@ export default function SignIn() {
       inputs
     })
     .then(function (response) {
-      console.log(response.data);
+      if(response.data)
+        setUser(response.data[0])
     })
   };
 

@@ -146,7 +146,7 @@ const JobForm2 = ({handleClose}) => {
           value={Description}
           multiline
           rows = {5}
-          Maxrows = {10}
+          maxrows = {10}
           onBlur = {(event) => onBlur(event, setDescriptionTouched)}
           onChange ={(event) => onInputUpdate(event,setDescription)}
           helperText={DescriptionInputisInvalid ? "Enter Description" : null}

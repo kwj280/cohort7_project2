@@ -2,7 +2,7 @@
 import { Routes, Route } from 'react-router-dom'
 import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
-
+import LandingPage from './LandingPage'
 import JobsPage from './JobsPage'
 import ProfilePage from './ProfilePage'
 import MyApplicationPage from './MyApplicationsPage'
@@ -15,8 +15,8 @@ function MainContentBody() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<JobsPage />} />
-        <Route path="/jobs" element={<JobsPage />} />
+        <Route path="/" element={<JobsPage  />} />
+        <Route path="/jobs" element={<LandingPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/my_applications" element={<MyApplicationPage />} />
         <Route path="/setting" element={<SettingPage />} />

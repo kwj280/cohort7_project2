@@ -1,11 +1,12 @@
+import React, {useEffect, useState} from 'react'
+import JobCard from '../components/JobsCard'
 const LandingPage = () => {
+
+
+
   return (
     <>
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-
-        <h1 className="App-title">Tech Connect YYC</h1>
-      </header>
+  <JobCard />
     </>
   )
 }

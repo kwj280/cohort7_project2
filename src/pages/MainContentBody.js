@@ -2,10 +2,7 @@ import {useState} from 'react'
 import { Routes, Route } from 'react-router-dom'
 import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
-<<<<<<< HEAD
 import LandingPage from './LandingPage'
-=======
->>>>>>> e590594c55e570495e76f5fa3d08831e0a756ff9
 import JobsPage from './JobsPage'
 import ProfilePage from './ProfilePage'
 import MyApplicationPage from './MyApplicationsPage'
@@ -13,11 +10,9 @@ import SettingPage from './SettingPage'
 import PostJobPage from './PostJobPage'
 import ApplicationsPage from './ApplicationsPage'
 
-
 function MainContentBody() {
   const [user,setUser] = useState()
-
-  return (
+  return (  
     <>
       <Routes>
         <Route path="/" element={<JobsPage />} />

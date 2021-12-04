@@ -53,7 +53,7 @@ const createProfile = async (profileInfo) => {
 
 //get Profile by Profile id
 const getProfileByProfileId = async (profile_id) => {
-    return true;
+    return profileModel.findById(profile_id)
 }
 
 //get Profile by user id

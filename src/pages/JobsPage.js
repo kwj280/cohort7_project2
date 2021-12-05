@@ -33,13 +33,3 @@ export default function BasicGrid() {
     </>
   )
 }
-
-// const JobsPage = () => {
-//   return (
-//     <>
-//       <JobCard />
-//     </>
-//   )
-// }
-
-// export default JobsPage

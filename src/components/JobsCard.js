@@ -43,7 +43,7 @@ function JobsCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={jobs.title}
+        title="title"
         subheader={new Date().toLocaleString()}
       />
       {/* <CardMedia

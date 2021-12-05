@@ -69,8 +69,8 @@ const addJob = async (jobInfo) => {
 }
 // get job object from db
 //getJob by Job id
-const getJobByJobId = async (job_id) => {
-  return true
+const getJobByJobId = async (jobId) => {
+  return jobModel.findOne({ jobId }).exec();
 }
 
 

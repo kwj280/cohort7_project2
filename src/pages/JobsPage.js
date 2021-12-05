@@ -1,6 +1,20 @@
 import '../App.css'
+import axios from 'axios'
+
 import TextField from '@mui/material/TextField'
+import { useEffect, useState } from 'react'
+
+
 const JobsPage = () => {
+  const [jobs, setJobs] = useState([])
+ 
+  useEffect(()=>{
+    axios.get('/job').then(res=>{
+      setJobs(res.data)
+      console.log(jobs)
+    })
+  },[])
+
   return (
     <>
       <div className="App-header">

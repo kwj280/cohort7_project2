@@ -10,11 +10,9 @@ import SettingPage from './SettingPage'
 import PostJobPage from './PostJobPage'
 import ApplicationsPage from './ApplicationsPage'
 
-
 function MainContentBody() {
   const [user,setUser] = useState()
-
-  return (
+  return (  
     <>
       <Routes>
         <Route path="/" element={<JobsPage />} />

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const jobsModel = require('../model/job')
+const jobsJson = require('../db_seed/jobs.json')
 
 //@test curl -X POST http://localhost:5000/job/create -H 'Content-Type: application/json' -d '{"title": "software developer", "description" : "develop things"}'
 router.post('/create', async (req, res) => {
@@ -22,5 +23,10 @@ router.post('/jobs/submit', async (req, res) => {
     // need to create CreateJob function for job postings
 })
 
+
+//return all the jobs
+router.get('/', async (req, res) => {
+    res.send(jobsJson)
+})
 
 module.exports = router

@@ -1,36 +1,36 @@
 const mongoose = require('mongoose')
 
 const jobSchema = new mongoose.Schema({
-  title: {
+   Title : {
     type: String,
     trim: true,
     required: [true, ' Please enter job title'],
   },
-  description: {
+  Description: {
     type: String,
     trim: true,
     required: [false, ' Please enter job description'],
   },
-  skills: {
+   Skills: {
     type: [String],
     required: false,
     message: 'Please enter applicable skills',
   },
   
-  company: {
+  Company: {
     type: String,
     trim: true,
     required: [false, 'Please enter company name'],
   },
-  availability: {
+  Availability: {
     type: Boolean,
     required: false,
   },
-  expiryDate: {
+  ExpiryDate: {
     type: String,
     required: false,
   },
-  link: {
+  Link: {
     type: String,
   },
 
@@ -39,8 +39,21 @@ const jobSchema = new mongoose.Schema({
   },
 })
 
-const jobModel = mongoose.model('Job', jobSchema)
 
+
+const jobModel = mongoose.model('Job',
+  {
+    "Title": String,
+    "Description": String,
+    "Skills": [String],
+    "Company": String,
+    "Availability": String,
+    "ExpiryDate": String,
+    "Link": String
+
+  })
+
+// Job Schema defined above does not work with database. Defined a new simpler one below. Will troubleshoot later
 
 
 /*  
@@ -55,13 +68,13 @@ Link[Company email, Company site]
 */
 
 // create new job
-const addJob = async (jobInfo) => {
+const CreateJob = async (jobInfo) => {
   console.log('jobInfo: ', jobInfo)
   let Job = new jobModel(jobInfo)
   console.log('job: ', Job)
   try {
     await Job.save()
-    return job._id
+    return Job._id
   } catch (error) {
     console.error(error)
     return false
@@ -108,5 +121,5 @@ module.exports = {
   updateJob,
   deleteJob,
   jobModel,
-  addJob,
+  CreateJob,
 }

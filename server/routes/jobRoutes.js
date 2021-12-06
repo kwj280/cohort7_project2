@@ -5,10 +5,11 @@ const jobsModel = require('../model/job')
 const jobsJson = require('../db_seed/jobs.json')
 
 //@test curl -X POST http://localhost:5000/job/create -H 'Content-Type: application/json' -d '{"title": "software developer", "description" : "develop things"}'
-router.post('/create', async (req, res) => {
-    // let jobList = await jobsModel.getJobByJobId()
-    // res.send(jobList)
-    console.log(req.body)
+router.post('/post_jobs', async (req, res) => {
+    let newJob = req.body
+    console.log(newJob) 
+    let createdId = await jobsModel.CreateJob(newJob)
+    console.log("Created new job:", createdId)
     res.send(req.body)
 })
 

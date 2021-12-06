@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const JobForm2 = ({ handleClose }) => {
+const JobForm = ({ handleClose }) => {
   const classes = useStyles();
 
   //  Declaring use state variables for Title textbox
@@ -119,13 +119,12 @@ const JobForm2 = ({ handleClose }) => {
   // Post data to the following endpoint '/job/submit' using axios instead of fetch
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(Title, Description, Link, Company, Availability, ExpiryDate)
-  
-    // axios.post('/job/submit', {
-    // Description, Title, ExpiryDate, Link, Company, Availability, Skills
-    // }).then(function(response) {
-    // console.log(response.data);
-    //  });
+    
+    axios.post('/job/post_jobs', {
+      Title, Description, Skills, Company, Availability, ExpiryDate, Link
+    }).then(function(response) {
+    console.log(response.data);
+     });
     reset()
   };
   
@@ -219,4 +218,4 @@ const JobForm2 = ({ handleClose }) => {
  
     
      
-  export default JobForm2
+  export default JobForm

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -27,14 +28,14 @@ const ExpandMore = styled((props) => {
 }))
 
 function JobsCard(props) {
-  const [expanded, setExpanded] = React.useState(false)
-
+  const [expanded, setExpanded] = useState(false)
+  const [title,getTitle] = useState([])
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ }}>
       <CardHeader
         avatar={<Avatar sx={{ bgColor: red[500] }} aria-label="jobs"></Avatar>}
         action={
@@ -42,7 +43,7 @@ function JobsCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title="title"
         subheader={new Date().toLocaleString()}
       />
       {/* <CardMedia
@@ -52,7 +53,12 @@ function JobsCard(props) {
         alt="Paella dish"
       /> */}
       <CardContent>
-        <Typography variant="body2" color="text.secondary"></Typography>
+        <Typography variant="body2" color="text.secondary"
+        title="Job Description"
+        >Job Description
+
+        </Typography>
+        
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">

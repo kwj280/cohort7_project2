@@ -27,7 +27,7 @@ const ExpandMore = styled((props) => {
   }),
 }))
 
-function JobsCard(props) {
+function JobsCard() {
   const [expanded, setExpanded] = useState(false)
   const [title,getTitle] = useState([])
   const handleExpandClick = () => {

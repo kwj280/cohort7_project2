@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
+
 import JobCard from '../components/JobsCard'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -12,7 +13,18 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-export default function BasicGrid() {
+export default function BasicGrid(props) {
+  const [jobs, setJobs] = useState('')
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [skills, setSkills] = useState([])
+  const [company, setCompany] = useState('')
+  const [url, setUrl] = useState('')
+  useEffect(() => {
+    fetch('/api/jobs')
+      .then((response) => response.json())
+      .then((json) => setJobs(json))
+  }, [])
   return (
     <>
       <h1 className="App">Job Postings</h1>
@@ -20,7 +32,11 @@ export default function BasicGrid() {
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <Item>
-              <JobCard />
+              
+              {jobs &&
+                jobs.map((job) => {
+                  return <p key={job.id}>{job.title}</p>
+                })}
             </Item>
           </Grid>
           <Grid item xs={8}>

@@ -32,13 +32,14 @@ export default function MainLayout() {
         <SideNavBar open={open} setOpen={setOpen} DrawerHeader={DrawerHeader} /> 
 
         {/* Main Content area */}
-        <Box sx={{ flexGrow: 1, p: 3 }}>
+        <Box sx={{ flexGrow: 1, p: 3, marginBottom: '10em'}}>
           <DrawerHeader />
           <MainContentBody />
         </Box>
 
-        <Footer />
       </Box>
+      <Footer />
+
     </>
   );
 }

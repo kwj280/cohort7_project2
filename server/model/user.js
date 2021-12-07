@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const {createProfile} = require('./profile')
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -30,6 +31,10 @@ const addUser = async(userInfo) => {
   let user = new userModel(userInfo)
   try {
     await user.save()
+    let emptyProfile = {
+      userId: user._id
+    }
+    await createProfile(emptyProfile)
     return true
   } catch (error) {
     console.error(error)

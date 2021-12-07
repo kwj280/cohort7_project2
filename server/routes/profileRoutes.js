@@ -47,7 +47,6 @@ app.post("/update", async (req, res) => {
 */
 app.get("/getByUserId/:userId", async (req, res) => {
   let userId = req.params.userId;
-  console.log(userId);
   let profile = await getProfileByUserId(userId);
   res.status(200).send(profile);
 });
@@ -59,7 +58,6 @@ app.get("/getByUserId/:userId", async (req, res) => {
 */
 app.get("/getByProfileId/:profileId", async (req, res) => {
   let profileId = req.params.profileId;
-  console.log(profileId);
   let profile = await getProfileByProfileId(profileId);
   res.status(200).send(profile);
 });
@@ -78,5 +76,13 @@ app.delete("/:profile_id", async (req, res) => {
       res.send("Profile is deleted");
     });
 });
+
+app.put("/updateProfilePicture", async (req, res) => {
+  console.log(req.body)
+  updateProfile(req.body, (updatedModel) => {
+    res.status(200).send(updatedModel);
+  });
+});
+
 
 module.exports = app;

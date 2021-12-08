@@ -9,7 +9,7 @@ const jobSchema = new mongoose.Schema({
   Description: {
     type: String,
     trim: true,
-    required: [false, ' Please enter job description'],
+    required: [true, 'Please enter job description'],
   },
    Skills: {
     type: [String],
@@ -23,7 +23,7 @@ const jobSchema = new mongoose.Schema({
     required: [false, 'Please enter company name'],
   },
   Availability: {
-    type: Boolean,
+    type: String,
     required: false,
   },
   ExpiryDate: {
@@ -41,17 +41,18 @@ const jobSchema = new mongoose.Schema({
 
 
 
-const jobModel = mongoose.model('Job',
-  {
-    "Title": String,
-    "Description": String,
-    "Skills": [String],
-    "Company": String,
-    "Availability": String,
-    "ExpiryDate": String,
-    "Link": String
+const jobModel = mongoose.model('Job', jobSchema)
 
-  })
+  // {
+  //   "Title": String,
+  //   "Description": String,
+  //   "Skills": [String],
+  //   "Company": String,
+  //   "Availability": String,
+  //   "ExpiryDate": String,
+  //   "Link": String
+
+  // })
 
 // Job Schema defined above does not work with database. Defined a new simpler one below. Will troubleshoot later
 
@@ -72,14 +73,10 @@ const CreateJob = async (jobInfo) => {
   console.log('jobInfo: ', jobInfo)
   let Job = new jobModel(jobInfo)
   console.log('job: ', Job)
-  try {
-    await Job.save()
-    return Job._id
-  } catch (error) {
-    console.error(error)
-    return false
+  await Job.save()
+  return Job._id
   }
-}
+
 // get job object from db
 //getJob by Job id
 const getJobByJobId = async (jobId) => {

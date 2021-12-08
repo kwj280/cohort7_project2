@@ -8,9 +8,14 @@ const jobsJson = require('../db_seed/jobs.json')
 router.post('/post_jobs', async (req, res) => {
     let newJob = req.body
     console.log(newJob) 
+    try {
     let createdId = await jobsModel.CreateJob(newJob)
     console.log("Created new job:", createdId)
-    res.send(req.body)
+    res.sendStatus(200)}
+    catch (error) {
+        console.log("This is an error", error)
+        res.sendStatus(500)
+    }
 })
 
 router.get('/:id', async (req, res) => {

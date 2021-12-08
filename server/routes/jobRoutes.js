@@ -19,20 +19,20 @@ router.post('/post_jobs', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-    let id = req.params.id
-    let jobs = await jobsModel.getJobByJobId(id)
-    res.send(jobs)
+  let id = req.params.id
+  let jobs = await jobsModel.getJobByJobId(id)
+  res.send(jobs)
 })
 
 router.post('/jobs/submit', async (req, res) => {
-    let job = req.body
-    // need to create CreateJob function for job postings
+  let job = req.body
+  // need to create CreateJob function for job postings
 })
 
-
 //return all the jobs
-router.get('/', async (req, res) => {
+router.get('/jobs', async (req, res) => {
     res.send(jobsJson)
+    console.log(jobsJson)
 })
 
 module.exports = router

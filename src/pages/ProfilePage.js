@@ -27,8 +27,8 @@ export default function ProfilePage({setUser, user}) {
         }} >
 
           <h1>Profile Component here</h1>
-          {/* {!user&&<SignIn setUser={setUser}/>} */}
-          {!user && <ProfileForm user={user}/>}
+          {!user&&<SignIn setUser={setUser}/>}
+          {user && <ProfileForm user={user}/>}
 
           </Paper>
       </Container>

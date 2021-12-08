@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000
 //server config
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(cors())
+// app.use(cors())
 
 console.log(process.env.connection_url)
 //kobkpG4XntTJKHgu

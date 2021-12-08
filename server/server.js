@@ -37,6 +37,10 @@ app.get('/ping', (req, res) => {
 });
 
 app.use('/user', userRouter)
+app.get('/api/jobs', (req, res) => {
+  console.log('Hello')
+  res.status(200).json(jobData)
+})
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
 app.use('/', express.static('../build'))
@@ -45,10 +49,7 @@ app.use('*', (req, res) => {
 })
 // API endpoints
 
-app.get('/api/jobs', (req, res) => {
-  console.log('Hello')
-  res.status(200).json(jobData)
-})
+
 
 // This displays message that the server running and listening to specified port
 app.listen(port, () => console.log(`Listening on port ${port}`)) //Line 6

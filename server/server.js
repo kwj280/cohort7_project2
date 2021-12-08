@@ -17,6 +17,7 @@ app.use(express.json())
 app.use(cors())
 
 console.log(process.env.connection_url)
+//kobkpG4XntTJKHgu
 // DB config
 mongoose.connect(process.env.connection_url || 'mongodb://localhost:27017/techConnect', {
   useNewUrlParser: true,
@@ -31,6 +32,10 @@ db.once('open', function () {
 })
 
 //routers
+app.get('/ping', (req, res) => {
+  res.status(200).json({ success:true })
+});
+
 app.use('/user', userRouter)
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)

@@ -34,8 +34,8 @@ export default function BasicGrid(props) {
             <Item>
               
               {jobs &&
-                jobs.map((job) => {
-                  return <p key={job.id}>{job.title}</p>
+                jobs.map((job,i) => {
+                  return <p key={i}>{job.title}</p>
                 })}
             </Item>
           </Grid>

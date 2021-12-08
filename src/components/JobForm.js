@@ -42,9 +42,9 @@ const JobForm = ({ handleClose }) => {
   const DescriptionInputisInvalid = !DescriptionisValid && DescriptionTouched;
 
   // Declaring use state variables Skills textbox
-  const [Skills, setSkills] = useState("");
+  const [skills, setSkills] = useState("");
   const [SkillsTouched, setSkillsTouched] = useState(false);
-  const SkillsisValid = Skills.trim() !== "";
+  const SkillsisValid = skills.trim() !== "";
   const SkillsInputisInvalid = !SkillsisValid && SkillsTouched;
 
   // Declaring use state variable for Company textbox
@@ -114,14 +114,13 @@ const JobForm = ({ handleClose }) => {
     formIsValid = true
   }
 
-  console.log(formIsValid)
 
   // Post data to the following endpoint '/job/submit' using axios instead of fetch
   const handleSubmit = (e) => {
     e.preventDefault();
     
     axios.post('/job/post_jobs', {
-      Title, Description, Skills, Company, Availability, ExpiryDate, Link
+      Title, Description, Skills: skills, Company, Availability, ExpiryDate, Link
     }).then(function(response) {
     console.log(response.data);
      });
@@ -165,7 +164,7 @@ const JobForm = ({ handleClose }) => {
         <TextField
           label="Skills"
           variant="outlined"
-          value={Skills}
+          value={skills}
           onBlur={(event) => onBlur(event, setSkillsTouched)}
           onChange={(event) => onInputUpdate(event, setSkills)}
           helperText={SkillsInputisInvalid ? "Enter Skills" : null}

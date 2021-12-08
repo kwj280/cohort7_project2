@@ -35,9 +35,9 @@ app.use('/user', userRouter)
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
 app.use('/', express.static('../build'))
-// app.use('*', (req, res) => {
-//   res.sendFile(path.join(__dirname,"../build","index.html"))
-// })
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname,"../build","index.html"))
+})
 // API endpoints
 
 app.get('/api/jobs', (req, res) => {

@@ -9,7 +9,7 @@ const jobRouter = require('./routes/jobRoutes')
 const jobData = require('./db_seed/jobs.json')
 const app = express()
 dotenv.config()
-const port = 5000
+const port = process.env.PORT || 5000
 
 //server config
 app.use(express.urlencoded({ extended: true }))
@@ -35,9 +35,9 @@ app.use('/user', userRouter)
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
 app.use('/', express.static('../build'))
-// app.use('*', (req,res)=>{
-//   res.sendFile(path.join(__dirname, "../build", "index.html"))
-// })
+app.use('*', (req,res)=>{
+  res.sendFile(path.join(__dirname, "../build", "index.html"))
+})
 // API endpoints
 
 app.get('/api/jobs', (req, res) => {

@@ -17,7 +17,7 @@ app.use(cors())
 
 console.log(process.env.connection_url)
 // DB config
-mongoose.connect(process.env.connection_url, {
+mongoose.connect(process.env.connection_url || 'mongodb://localhost:27017/techConnect', {
   useNewUrlParser: true,
   // useCreateIndex: true,
   useUnifiedTopology: true,
@@ -33,7 +33,7 @@ db.once('open', function () {
 app.use('/user', userRouter)
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
-
+app.use('/', express.static('../build'))
 // API endpoints
 
 app.get('/api/jobs', (req, res) => {

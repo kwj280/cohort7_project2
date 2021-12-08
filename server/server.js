@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const path = require('path')
 const dotenv = require('dotenv')
 const cors = require('cors')
 const userRouter = require('./routes/userRoutes')
@@ -34,6 +35,9 @@ app.use('/user', userRouter)
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
 app.use('/', express.static('../build'))
+// app.use('*', (req,res)=>{
+//   res.sendFile(path.join(__dirname, "../build", "index.html"))
+// })
 // API endpoints
 
 app.get('/api/jobs', (req, res) => {

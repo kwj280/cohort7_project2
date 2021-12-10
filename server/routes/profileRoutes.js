@@ -33,7 +33,7 @@ app.post("/create", async (req, res) => {
   param: new profile 
   return: updated profile model
 */
-app.post("/update", async (req, res) => {
+app.put("/update", async (req, res) => {
   let profile = req.body;
   updateProfile(profile, (updatedModel) => {
     res.status(200).send(updatedModel);

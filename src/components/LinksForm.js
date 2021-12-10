@@ -87,9 +87,6 @@ const LinksForm = ({ profile, setProfile }) => {
             </>
           }
 
-
-
-
           <Grid item xs={12}>
             <Collapse in={editLinks}>
               <Grid

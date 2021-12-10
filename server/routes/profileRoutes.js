@@ -7,20 +7,23 @@ const {
   deleteProfile,
 } = require("../model/profile");
 
-const app = express();
+const router = express.Router();
 
-let testProfileJson = {
-  userId: "6195f25f0b944fa89fe45ca6",
-  skills: ["C++", "Javascript", "Frontend dveleopemnt2"],
-  interest: ["Machine learnoing"],
-};
+const mustBeLoggedIn = async (req, res, next) =>{
+  if(req.user){
+    next()
+    return
+  }
+  res.sendStatus(401)
+}
+
 
 /* @author: Woojae Kim
  create a new profile for user
   param: same as profile schema
   return: status 200 and created profile if successful, status 500 otherwise
 */
-app.post("/create", async (req, res) => {
+router.post("/create", async (req, res) => {
   let pofile = await createProfile(testProfileJson);
   if (!pofile) res.status(500).send("failed to create");
   res.status(200).send(pofile);
@@ -33,7 +36,7 @@ app.post("/create", async (req, res) => {
   param: new profile 
   return: updated profile model
 */
-app.put("/update", async (req, res) => {
+router.put("/update", mustBeLoggedIn, async (req, res) => {
   let profile = req.body;
   updateProfile(profile, (updatedModel) => {
     res.status(200).send(updatedModel);
@@ -45,7 +48,7 @@ app.put("/update", async (req, res) => {
   param: user id
   return: profile object
 */
-app.get("/getByUserId/:userId", async (req, res) => {
+router.get("/getByUserId/:userId", mustBeLoggedIn , async (req, res) => {
   let userId = req.params.userId;
   let profile = await getProfileByUserId(userId);
   res.status(200).send(profile);
@@ -56,7 +59,7 @@ app.get("/getByUserId/:userId", async (req, res) => {
   param: profile id
   return: profile object
 */
-app.get("/getByProfileId/:profileId", async (req, res) => {
+router.get("/getByProfileId/:profileId", mustBeLoggedIn , async (req, res) => {
   let profileId = req.params.profileId;
   let profile = await getProfileByProfileId(profileId);
   res.status(200).send(profile);
@@ -68,7 +71,7 @@ app.get("/getByProfileId/:profileId", async (req, res) => {
 return: true if succeed false otherwise
 
 */
-app.delete("/:profile_id", async (req, res) => {
+router.delete("/:profile_id", async (req, res) => {
   database
     .collection("profile")
     .deleteOne({ id: parseInt(req.params.id) }, (err, result) => {
@@ -77,12 +80,11 @@ app.delete("/:profile_id", async (req, res) => {
     });
 });
 
-app.put("/updateProfilePicture", async (req, res) => {
-  console.log(req.body)
+router.put("/updateProfilePicture", async (req, res) => {
+  
   updateProfile(req.body, (updatedModel) => {
     res.status(200).send(updatedModel);
   });
 });
 
-
-module.exports = app;
+module.exports = router;

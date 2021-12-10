@@ -28,6 +28,7 @@ const SkillsForm = ({ profile, setProfile }) => {
   const [skill, setSkill] = useState('');
   const [skills, setSkills] = useState(profile ? profile.skills : [])
   const addSkillBtnRef = useRef()
+  
   useEffect(() => {
     if (profile)
       setSkills(profile.skills)

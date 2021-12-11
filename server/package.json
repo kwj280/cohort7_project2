@@ -20,6 +20,6 @@
     "moment": "^2.29.1",
     "mongodb": "^4.1.4",
     "passport": "^0.5.0",
-    "passport-local": "^1.0.0",
+    "passport-local": "^1.0.0"
   }
 }

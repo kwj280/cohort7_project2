@@ -40,12 +40,13 @@ export default function SignIn({setUser}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('/user/signIn',{
-      inputs
+    axios.post('/user/login',{
+      email:inputs.email,
+      password: inputs.password
     })
     .then(function (response) {
       if(response.data)
-        setUser(response.data[0])
+        setUser(response.data)
     })
   };
 

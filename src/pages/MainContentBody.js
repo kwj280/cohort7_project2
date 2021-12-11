@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { Routes, Route } from 'react-router-dom'
 import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
@@ -9,9 +9,18 @@ import MyApplicationPage from './MyApplicationsPage'
 import SettingPage from './SettingPage'
 import PostJobPage from './PostJobPage'
 import ApplicationsPage from './ApplicationsPage'
+import axios from 'axios'
+
 
 function MainContentBody() {
   const [user,setUser] = useState()
+  useEffect(()=>{
+    axios.post('/user/loggedInUser')
+    .then(function (response) {
+      if(response.data)
+        setUser(response.data)
+    })
+  }, [])
   return (  
     <>
       <Routes>

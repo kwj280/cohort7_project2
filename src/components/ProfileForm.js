@@ -1,4 +1,3 @@
-import { makeStyles } from '@material-ui/core';
 import MuiTextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios'
@@ -8,13 +7,14 @@ import { Grid, IconButton, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { Avatar } from '@mui/material';
 import { useRef, useEffect } from 'react';
-import AutoCompleteInput from './AutoCompleteInput'
-import Chip from '@mui/material/Chip';
 import Collapse from '@mui/material/Collapse';
 import WorkExperienceForm from "./WorkExperienceForm";
-import Switch from '@mui/material/Switch';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import SkillsForm from './SkillsForm'
+import InterestsForm from './InterestsForm';
+import LinksForm from './LinksForm';
+
 //import {useForm, Controller} from "react-hook-form"
 
 const TextField = styled(MuiTextField)({
@@ -26,8 +26,6 @@ const ListItem = styled('li')(({ theme }) => ({
 }));
 
 
-const skillOptions = ['HTML', 'CSS', 'Javascript', 'Node', 'React', 'MongoDB'];
-const interestOptions = ['Machine Learning', 'Big Data', 'System Design', 'Load Balancing', 'UI design']
 
 
 const ProfileForm = ({ user }) => {
@@ -37,15 +35,9 @@ const ProfileForm = ({ user }) => {
   const [firstName, setFirstName] = useState(user?.firstName ?? '')
   const [lastName, setLastName] = useState(user?.lastName ?? '')
 
-  const [skill, setSkill] = useState('');
-  const [skills, setSkills] = useState([])
-  const addSkillBtnRef = useRef()
 
-  const [interest, setInterest] = useState('');
-  const [interests, setInterests] = useState([])
-  const addInterestBtnRef = useRef()
 
-  const [showWorkExperienceForm, setShowWorkExperienceForm] = useState(false);
+
   useEffect(() => {
     axios.get('/profile/getByUserId/' + user._id).then(res => {
       setProfile(res.data)
@@ -89,7 +81,7 @@ const ProfileForm = ({ user }) => {
 
       // newImage.text().then(img => {
       //   console.log(img)
-        
+
       // })
       setImage(URL.createObjectURL(newImage));
     }
@@ -115,7 +107,7 @@ const ProfileForm = ({ user }) => {
   };
   return (
     <>
-      <Box sx={{ maxWidth: '50%' }}>
+      <Box sx={{ maxWidth: '55%' }}>
         <Grid
           container
           justifyContent="center"
@@ -135,86 +127,33 @@ const ProfileForm = ({ user }) => {
               </Avatar>
             </IconButton>
           </Grid>
-          <Grid item xs={12} container justifyContent="center" sx={{ marginBottom: "2em" }}>
+          <Grid item xs={12} container justifyContent="center" >
             <Typography variant="h6"> {user?.email} </Typography>
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="First Name"
-              variant="outlined"
-              value={firstName}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Last Name"
-              variant="outlined"
-              value={lastName}
-            />
-          </Grid>
-          <Grid item xs={10}>
-            <AutoCompleteInput
-              selectLabel={"Skills"}
-              optionList={skillOptions}
-              value={skill}
-              setValue={setSkill}
-              buttonRef={addSkillBtnRef} />
-          </Grid>
-          <Grid item xs={2}>
-            <Button variant="text" ref={addSkillBtnRef} onClick={() => clickAddButton(skill, setSkill, setSkills)}>ADD</Button>
-          </Grid>
-          <Grid item xs={12} container sx={{ listStyle: 'none' }}>
-            {skills.map(skill => {
-              return (
-                <ListItem key={skill}>
-                  <Chip
-                    label={skill}
-                    onDelete={handleDelete(skill, setSkills)}
-                  />
-                </ListItem>
-              )
-            })}
+          <Grid item xs={12} container justifyContent="center" sx={{ marginBottom: "2em" }}>
+            <Typography variant="h6"> {user?.firstName} {user?.lastName} </Typography>
           </Grid>
 
-          <Grid item xs={10}>
-            <AutoCompleteInput selectLabel={"Interests"}
-              optionList={interestOptions}
-              value={interest}
-              setValue={setInterest}
-              buttonRef={addInterestBtnRef}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <Button variant="text" ref={addInterestBtnRef} onClick={() => clickAddButton(interest, setInterest, setInterests)}>ADD</Button>
-          </Grid>
-          <Grid item xs={12} container sx={{ listStyle: 'none' }}>
-            {interests.map(interest => {
-              return (
-                <ListItem key={interest}>
-                  <Chip
-                    label={interest}
-                    onDelete={handleDelete(interest, setInterests)}
-                  />
-                </ListItem>
-              )
-            })}
-          </Grid>
-          <Grid item xs={10}>
-            <h4>Project/Work Experience</h4>
-          </Grid>
-          <Grid item xs={2}>
-            <Button onClick={() => setShowWorkExperienceForm((prev) => !prev)}>
-              {!showWorkExperienceForm ? <AddIcon /> : <CloseIcon />}
-            </Button>
-          </Grid>
+          {/************************************SKILLS************************************/}
           <Grid item xs={12}>
-            <Collapse in={showWorkExperienceForm}>
-              <WorkExperienceForm setShowWorkExperienceForm={setShowWorkExperienceForm} />
-            </Collapse>
+            <SkillsForm profile={profile} setProfile={setProfile}/>
+          </Grid>
+          {/**********************************Interests***********************************/}
+          <Grid item xs={12}>
+            <InterestsForm profile={profile} setProfile={setProfile}/>
           </Grid>
 
+          {/**********************************Projects***********************************/}
 
+          <Grid item xs={12}>
+              <WorkExperienceForm  profile={profile} setProfile={setProfile} />
+          </Grid>
 
+          {/**********************************Links***********************************/}
+         
+         <Grid item xs={12}>
+           <LinksForm  profile={profile} setProfile={setProfile}/>
+         </Grid>
         </Grid>
       </Box>
     </>

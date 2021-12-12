@@ -74,7 +74,7 @@ const LinksForm = ({ profile, setProfile }) => {
                 </Link>
               </Grid>
             </>}
-          {!editLinks && linkLinkedIn &&
+          {!editLinks && linkGit &&
             <>
               <Grid item xs={1}>
                 <GitHubIcon fontSize="large" />

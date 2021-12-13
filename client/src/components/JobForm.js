@@ -1,11 +1,17 @@
 import { makeStyles} from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import axios from 'axios'
-import {useState, useEffect} from 'react'
-//import {useForm, Controller} from "react-hook-form"
+import axios from 'axios';
+import {useState, useEffect} from 'react';
+import AdapterDateFns from '@mui/lab/AdapterMoment';
+import DatePicker from '@mui/lab/DatePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import moment from 'moment';
+import * as yup from "yup"
+
 
 // Style Function
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,6 +34,12 @@ const useStyles = makeStyles(theme => ({
 
 const JobForm = ({ handleClose }) => {
   const classes = useStyles();
+
+  const TestDate = new Date()
+  console.log(TestDate)
+  const newDate = moment(TestDate).format('YYYY-MM-DD')
+  console.log(newDate)
+  
 
   //  Declaring use state variables for Title textbox
   const [Title, setTitle] = useState("");
@@ -55,15 +67,15 @@ const JobForm = ({ handleClose }) => {
 
   // Declaring use state variable for Availability textbox
   const [Availability, setAvailability] = useState("")
-  const [AvailabilityTouched, setAvailabilityTouched] = useState(false)
-  const AvailabilityisValid = Availability.trim() !== "";
-  const AvailabilityisInvalid = !AvailabilityisValid && AvailabilityTouched;
+  //const [AvailabilityTouched, setAvailabilityTouched] = useState(false)
+  const AvailabilityisValid = Availability !== null;
+  const AvailabilityisInvalid = !AvailabilityisValid //AvailabilityTouched;
 
   // Declaring use state variable for ExpiryDate Textbox
-  const [ExpiryDate, setExpiryDate] = useState("")
-  const [ExpiryDateTouched, setExpiryDateTouched] = useState(false)
-  const ExpiryDateisValid = ExpiryDate.trim() !== "";
-  const ExpiryDateisInvalid = !ExpiryDateisValid && ExpiryDateTouched;
+  const [ExpiryDate, setExpiryDate] = useState(null)
+  //const [ExpiryDateTouched, setExpiryDateTouched] = useState(false)
+  const ExpiryDateisValid = ExpiryDate !== null;
+  const ExpiryDateisInvalid = !ExpiryDateisValid //ExpiryDateTouched;
 
   // Declaring use state variables for Link Textbox
   const [Link, setlink] = useState("");
@@ -98,11 +110,11 @@ const JobForm = ({ handleClose }) => {
     setCompany("");
     setCompanyTouched(false);
     //Reset Availability
-    setAvailability("");
-    setAvailabilityTouched(false);
+    setAvailability(null);
+    //setAvailabilityTouched(false);
     //Reset Expiry Date
-    setExpiryDate("");
-    setExpiryDateTouched(false);
+    setExpiryDate(null);
+    //setExpiryDateTouched(false);
     //Reset Link
     setlink("");
     setlinkTouched(false);
@@ -127,21 +139,10 @@ const JobForm = ({ handleClose }) => {
     reset()
   };
   
-  // const JobPost = ({setSelectedJobPost}) => {
-  //   const [jobPost, setJobPost] = useState([])
-  //   useEffect(() => {
-  //     async function fetchData() {
-  //       // console.log('Fetching superhero data!')
-  //       let fetchResult = await fetch("http://localhost:27017/")
-  //       let superheroList = await fetchResult.json()
-  //       setSuperheroes(superheroList)
-  //     }
-  //     fetchData()
-  //   }, [])
 
   return (
     <>
-      <form className={classes.root} onSubmit={handleSubmit}>
+      <div className={classes.root} onSubmit={handleSubmit}>
         <TextField
           label="Title"
           variant="outlined"
@@ -177,22 +178,22 @@ const JobForm = ({ handleClose }) => {
           onChange={(event) => onInputUpdate(event, setCompany)}
           helperText={CompanyInputisInvalid ? "Enter Company" : null}
         />
-        <TextField
-          label="Availability"
-          variant="outlined"
-          value={Availability}
-          onBlur={(event) => onBlur(event, setAvailabilityTouched)}
-          onChange={(event) => onInputUpdate(event, setAvailability)}
-          helperText={AvailabilityisInvalid ? "Enter Availability" : null}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DatePicker
+              label="Availability"
+              value={Availability}
+              views={['year', 'month']}
+              onChange={(newValue) => setAvailability(newValue)}
+              renderInput={(params) => <TextField {...params}/>}
         />
-        <TextField
-          label="Expiry Date"
-          variant="outlined"
-          value={ExpiryDate}
-          onBlur={(event) => onBlur(event, setExpiryDateTouched)}
-          onChange={(event) => onInputUpdate(event, setExpiryDate)}
-          helperText={ExpiryDateisInvalid ? "Enter Expiry Date" : null}
+        <DatePicker
+              label="Expiry Date"
+              value={ExpiryDate}
+              openTo="day"
+              onChange={(newValue) => {setExpiryDate(newValue);}}
+              renderInput={(params) => <TextField {...params} />}
         />
+        </LocalizationProvider>        
         <TextField
           label="Link"
           variant="outlined"
@@ -209,7 +210,7 @@ const JobForm = ({ handleClose }) => {
             Submit
           </Button>
         </div>
-      </form>
+      </div>
     </>
 
   );

@@ -33,7 +33,7 @@ router.post('/signIn', async (req, res) => {
   res.send(user)
 })
 
-router.post('/loggedInUser', async (req, res) => {
+router.post('/loggedInUser', async (req, res) => {  
   res.send(req.user)
 })
 
@@ -48,10 +48,10 @@ router.post('/login',
 passport.use(new LocalStrategy(
   {usernameField:"email", passwordField:"password"},
   function (username, password, done) {
-
     findByUserEmail(username).then((user) => {
-      if (!user || user.password !== password)
+      if (!user || user.password !== password){
         return done(null, false, { message: 'user not found' })
+      }
 
       return done(null, user)
     }).catch(done)

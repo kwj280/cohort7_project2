@@ -17,8 +17,10 @@ function MainContentBody() {
   useEffect(()=>{
     axios.post('/user/loggedInUser')
     .then(function (response) {
-      if(response.data)
+      if(response.data){
         setUser(response.data)
+        console.log(response)
+      }
     })
   }, [])
   return (  

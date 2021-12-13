@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
@@ -12,19 +12,29 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 const JobGrid = () => {
+  const [jobs, setJobs] = useState('')
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
+          <Item>
+            <JobCard
+            // {...jobs &&
+            //   jobs.map((job) => {
+            //     return (
+            //       <ul key={job.id}>
+            //         <li>{job.title}</li>
+            //       </ul>
+            //     )
+            //   })}
+            />
+          </Item>
+        </Grid>
+        {/* <Grid item xs={6}>
           <Item>
             <JobCard />
           </Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>
-            <JobCard />
-          </Item>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   )

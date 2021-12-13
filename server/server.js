@@ -30,7 +30,7 @@ app.use('/profile', profileRouter)
 app.use('/user', userRouter)
 
 app.get('/api/jobs', (req, res) => {
-  console.log('Hello')
+  console.log(jobData)
   res.status(200).json(jobData)
   
   

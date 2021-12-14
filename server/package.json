@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.1.0",
+    "nodemon": "^2.0.15",
+    "date-fns": "^2.0.0-beta.5",
+    "express-session": "^1.17.2",
+    "moment": "^2.29.1",
+    "mongodb": "^4.1.4",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0"
+  }
+}

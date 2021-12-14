@@ -1,6 +1,6 @@
 import '../App.css'
 import TextField from '@mui/material/TextField'
-const JobsPage = () => {
+const LandingPage = () => {
   return (
     <>
       <div className="App-header">
@@ -31,4 +31,4 @@ const JobsPage = () => {
   )
 }
 
-export default JobsPage
+export default LandingPage

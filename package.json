@@ -1,5 +1,6 @@
 {
   "name": "cohort7_project2",
+<<<<<<< HEAD
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,29 +28,28 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
+=======
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+>>>>>>> ce8fc18d75dc1cb0cd5cbf2ee1b4ec8ce5ea168f
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "install": "npm run install-client && npm run install-server",
+    "install-client": "cd client && npm install && cd ..",
+    "install-server": "cd server && npm install && cd ..",
+    "build": "npm run build-client",
+    "build-client": "cd client && npm run build && cd ..",
+    "start": "npm run start-server",
+    "start-server": "cd server && npm start && cd .."
   },
-  "proxy": "http://localhost:5000",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwj280/cohort7_project2.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kwj280/cohort7_project2/issues"
+  },
+  "homepage": "https://github.com/kwj280/cohort7_project2#readme"
 }

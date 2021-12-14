@@ -14,7 +14,8 @@ const mongoose = require('mongoose')
 const profileSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     profile_picture: {
         type: Buffer,
@@ -53,7 +54,7 @@ const createProfile = async (profileInfo) => {
 
 //get Profile by Profile id
 const getProfileByProfileId = async (profile_id) => {
-    return true;
+    return profileModel.findById(profile_id)
 }
 
 //get Profile by user id

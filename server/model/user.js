@@ -1,8 +1,8 @@
-const userModel = mongoose.model('User', userSchema)
 const mongoose = require('mongoose')
-const {createProfile} = require('./profile')
+const { createProfile } = require('./profile')
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     firstName: {
       type: String,
     },
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
       unique: true,
       required: true,
     },
-    
+
     password: {
       type: String,
       required: true,
@@ -25,20 +25,21 @@ const userSchema = new mongoose.Schema({
   },
 )
 
+const userModel = mongoose.model('User', userSchema)
 
-const hashPassword = (password) =>{
+const hashPassword = (password) => {
   return password
 }
 
 //create new user
-const addUser = async(userInfo) => {
+const addUser = async (userInfo) => {
   let hashedPassword = hashPassword(userInfo.password)
 
   let user = new userModel(userInfo)
   try {
     await user.save()
     let emptyProfile = {
-      userId: user._id
+      userId: user._id,
     }
     await createProfile(emptyProfile)
     return true
@@ -49,23 +50,22 @@ const addUser = async(userInfo) => {
 }
 
 //sign user in with email and password
-const signIn = async(userInfo) =>{
+const signIn = async (userInfo) => {
   let user = await userModel.find({
     email: userInfo.email,
-    password: userInfo.password
+    password: userInfo.password,
   })
   return user
 }
 
-const findByUserEmail = async (email) =>{
-  let user = await userModel.findOne({email})
+const findByUserEmail = async (email) => {
+  let user = await userModel.findOne({ email })
   return user
 }
 
-const findById = async (id) =>{
+const findById = async (id) => {
   let user = await userModel.findById(id)
   return user
-
 }
 
-module.exports = {userModel, addUser, signIn, findByUserEmail, findById}
+module.exports = { userModel, addUser, signIn, findByUserEmail, findById }

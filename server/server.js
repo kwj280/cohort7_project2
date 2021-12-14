@@ -29,7 +29,7 @@ app.use(passport.session());
 // app.use(cors())
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
-app.use('/auth', authRoutes)
+// app.use('/auth', authRoutes)
 app.use('/user', userRouter)
 
 app.get('/api/jobs', (req, res) => {

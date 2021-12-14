@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const userRouter = require('./routes/userRoutes')
 const profileRouter = require('./routes/profileRoutes')
 const jobRouter = require('./routes/jobRoutes')
+const authRoutes = require('./routes/auth')
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use('/user', userRouter)
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
+app.use('/auth', authRoutes)
 
 mongoose.connect(
   'mongodb://localhost:27017/techConnect',

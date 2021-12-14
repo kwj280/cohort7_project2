@@ -11,8 +11,8 @@ const app = express();
 
 let testProfileJson = {
   userId: "6195f25f0b944fa89fe45ca6",
-  skills: ["C++", "Javascript", "Frontend dveleopemnt2"],
-  interest: ["Machine learnoing"],
+  skills: ["C++", "Javascript", "Frontend development2"],
+  interest: ["Machine learning"],
 };
 
 /* @author: Woojae Kim
@@ -75,7 +75,7 @@ app.delete("/:profile_id", async (req, res) => {
     .collection("profile")
     .deleteOne({ id: parseInt(req.params.id) }, (err, result) => {
       if (err) throw error;
-      res.send("Profile is deleted");
+      res.send("Profile has been deleted.");
     });
 });
 

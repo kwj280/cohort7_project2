@@ -1,3 +1,4 @@
+const userModel = mongoose.model('User', userSchema)
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
@@ -22,7 +23,6 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
   },
 )
-const userModel = mongoose.model('User', userSchema)
 
 
 //create new user

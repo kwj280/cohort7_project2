@@ -32,14 +32,10 @@ app.use('/user', userRouter)
 app.get('/api/jobs', (req, res) => {
   console.log(jobData)
   res.status(200).json(jobData)
-  
-  
 })
 app.get('/ping', (req, res) => {
   res.status(200).json({ success:true })
 });
-
-
 app.use('/', express.static('../client/build'))
 app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname,"../client/build","index.html"))
@@ -62,19 +58,6 @@ db.on('error', console.error.bind(console, 'connection error: '))
 db.once('open', function () {
   console.log('Connection Established')
 })
-
-//routers
-app.use('/user', userRouter)
-app.use('/job', jobRouter)
-app.use('/profile', profileRouter)
-
-// API endpoints
-
-app.get('/api/jobs', (req, res) => {
-  console.log('Hello')
-  res.status(200).json(jobData)
-})
-
 
 
 // This displays message that the server running and listening to specified port

@@ -69,7 +69,7 @@ const SkillsForm = ({ profile, setProfile }) => {
             <Typography variant="h6">Skills </Typography>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item container justifyContent="right" xs={2}>
             <Button sx={{ paddingY: '0px' }} onClick={() => setEditSkills((prev) => !prev)}>
               {!editSkills ? editButtonVisible && <EditIcon /> : editButtonVisible && <CloseIcon />}
             </Button>

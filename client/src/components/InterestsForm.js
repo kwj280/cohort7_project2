@@ -74,7 +74,7 @@ const InterestsForm = ({ profile, setProfile }) => {
           <Grid item xs={10}>
             <Typography variant="h6">Interests </Typography>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={2} container justifyContent="right">
             <Button sx={{ paddingY: '0px' }} onClick={() => setEditInterests((prev) => !prev)}>
               {!editInterests ? editButtonVisible&&<EditIcon /> : editButtonVisible&&<CloseIcon />}
             </Button>

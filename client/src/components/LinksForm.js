@@ -58,7 +58,7 @@ const LinksForm = ({ profile, setProfile }) => {
           <Grid item xs={10} >
             <Typography variant="h6" sx={{ paddingBottom: "0px" }}>Link</Typography>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={2} container justifyContent="right">
             <Button sx={{ paddingY: '0px' }} onClick={() => setEditLinks((prev) => !prev)}>
               {!editLinks ? editButtonVisible && <EditIcon /> : editButtonVisible && <CloseIcon />}
             </Button>
@@ -69,7 +69,7 @@ const LinksForm = ({ profile, setProfile }) => {
                 <LinkedInIcon color="primary" fontSize="large" />
               </Grid>
               <Grid item xs={11} sx={{ paddingBottom: "12px" }}>
-                <Link href={linkLinkedIn} underline="none">
+                <Link href={linkLinkedIn} underline="none" target="_blank">
                   {linkLinkedIn}
                 </Link>
               </Grid>
@@ -80,7 +80,7 @@ const LinksForm = ({ profile, setProfile }) => {
                 <GitHubIcon fontSize="large" />
               </Grid>
               <Grid item xs={11} sx={{ paddingBottom: "12px" }}>
-                <Link href={linkGit} underline="none">
+                <Link href={linkGit} underline="none" target="_blank">
                   {linkGit}
                 </Link>
               </Grid>

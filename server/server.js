@@ -6,6 +6,8 @@ const cors = require('cors')
 const userRouter = require('./routes/userRoutes')
 const profileRouter = require('./routes/profileRoutes')
 const jobRouter = require('./routes/jobRoutes')
+const authRoutes = require('./routes/auth')
+
 const jobData = require('./db_seed/jobs.json')
 const app = express()
 const session = require("express-session")
@@ -27,6 +29,7 @@ app.use(passport.session());
 // app.use(cors())
 app.use('/job', jobRouter)
 app.use('/profile', profileRouter)
+app.use('/auth', authRoutes)
 app.use('/user', userRouter)
 
 app.get('/api/jobs', (req, res) => {

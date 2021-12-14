@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import WorkIcon from '@mui/icons-material/Work';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import GroupIcon from '@mui/icons-material/Group';
 import PostAddIcon from '@mui/icons-material/PostAdd';
@@ -68,6 +69,7 @@ export default function SideNavBar({ open, setOpen, DrawerHeader }) {
     { text: 'Profile', icon: <AccountBoxIcon />, link: '/profile' },
     { text: 'My Applications', icon: <ContactPageIcon />, link: '/my_applications' },
     { text: 'Setting', icon: <SettingsIcon />, link: '/setting' },
+    { text: 'Logout', icon: <LogoutIcon />, link: '/logout'},
 
   ]
   const recruiterMenuItems = [

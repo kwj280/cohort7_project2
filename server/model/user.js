@@ -1,3 +1,4 @@
+const userModel = mongoose.model('User', userSchema)
 const mongoose = require('mongoose')
 const {createProfile} = require('./profile')
 
@@ -23,7 +24,6 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
   },
 )
-const userModel = mongoose.model('User', userSchema)
 
 
 const hashPassword = (password) =>{

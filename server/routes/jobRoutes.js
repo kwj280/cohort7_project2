@@ -35,8 +35,9 @@ router.post('/jobs/submit', async (req, res) => {
 //   res.send(JobList)
 // })
 router.get('/api/jobs', async (req, res) => {
-  res.send(jobsJson)
-  console.log(jobsJson)
+  let jobs =  await jobsModel.getJobs()
+  res.send(jobs)
+  console.log(jobs)
 })
 
 module.exports = router

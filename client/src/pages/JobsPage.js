@@ -15,26 +15,19 @@ const JobGrid = () => {
   const [jobs, setJobs] = useState('')
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Item>
-            <JobCard
-            // {...jobs &&
-            //   jobs.map((job) => {
-            //     return (
-            //       <ul key={job.id}>
-            //         <li>{job.title}</li>
-            //       </ul>
-            //     )
-            //   })}
-            />
-          </Item>
-        </Grid>
-        {/* <Grid item xs={6}>
+      <Grid
+        container
+        spacing={0}
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: '100vh' }}
+      >
+        <Grid item xs={8}>
           <Item>
             <JobCard />
           </Item>
-        </Grid> */}
+        </Grid>
       </Grid>
     </Box>
   )

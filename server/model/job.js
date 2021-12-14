@@ -1,36 +1,36 @@
 const mongoose = require('mongoose')
 
 const jobSchema = new mongoose.Schema({
-   Title : {
+   title : {
     type: String,
     trim: true,
     required: [true, ' Please enter job title'],
   },
-  Description: {
+  description: {
     type: String,
     trim: true,
     required: [true, 'Please enter job description'],
   },
-   Skills: {
+   skills: {
     type: [String],
     required: false,
     message: 'Please enter applicable skills',
   },
   
-  Company: {
+  company: {
     type: String,
     trim: true,
     required: [false, 'Please enter company name'],
   },
-  Availability: {
+  availability: {
     type: String,
     required: false,
   },
-  ExpiryDate: {
+  expiryDate: {
     type: String,
     required: false,
   },
-  Link: {
+  link: {
     type: String,
   },
 
@@ -91,8 +91,8 @@ const getJobsByUserId = async (user_id) => {
 
 // get Jobs by search query this using 3rd party API
 
-const getJobs = async (user_id) => {
-  return true
+const getJobs = async () => {
+  return jobModel.find({})
 }
 
 // update Jobs

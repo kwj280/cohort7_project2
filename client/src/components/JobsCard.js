@@ -35,7 +35,7 @@ export default function JobCard() {
   useEffect(() => {
     async function fetchData() {
       console.log('Fetching Job data!')
-      let fetchResult = await fetch('/api/jobs/')
+      let fetchResult = await fetch('/job/api/jobs')
       let JobList = await fetchResult.json()
       console.log('JobList is:', JobList)
       setJobs(JobList)
@@ -48,7 +48,7 @@ export default function JobCard() {
       {jobs &&
         jobs.map((job) => {
           return (
-            <Card>
+            <Card key={job._id}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="jobs">
@@ -60,17 +60,23 @@ export default function JobCard() {
                     <MoreVertIcon />
                   </IconButton>
                 }
-                title={job.title}
-                subheader={job.company}
+                title={job.Title || job.title}
+                subheader={job.Company || job.company}
+                //  skills = {job.skills || job.Skills}
               />
 
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  {job.description}
+                  {job.Description || job.description}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {job.timestamps}
-                </Typography>
+                  {job.timestamps || job.Timestamps}
+                 </Typography>
+                <Typography>{job.skills || job.Skills} </Typography>
+                <Typography>{job.link || job.Link}</Typography>
+               
+                  
+               
               </CardContent>
               <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

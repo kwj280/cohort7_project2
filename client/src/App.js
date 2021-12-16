@@ -1,13 +1,10 @@
-import React from 'react'
-// import logo from './logo.svg';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import './App.css'
-import MainLayout from './pages/MainLayout'
+import "./App.css";
+import MainLayout from "./pages/MainLayout";
 
 const theme = createTheme();
-
-
 
 function App() {
   return (
@@ -16,8 +13,7 @@ function App() {
         <MainLayout />
       </ThemeProvider>
     </>
-  )
+  );
 }
 
-
-export default App
+export default App;

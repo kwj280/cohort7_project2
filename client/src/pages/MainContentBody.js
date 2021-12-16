@@ -28,6 +28,8 @@ function MainContentBody() {
       <Routes>
         <Route path="/" element={<JobsPage />} />
         <Route path="/jobs" element={<LandingPage />} />
+        <Route path="/jobs/:q" element={<LandingPage />} />
+
         <Route path="/profile" element={<ProfilePage  setUser={setUser} user={user}/>} />
         <Route path="/my_applications" element={<MyApplicationPage />} />
         <Route path="/setting" element={<SettingPage />} />

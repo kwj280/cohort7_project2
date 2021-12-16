@@ -15,6 +15,7 @@ import ShareIcon from '@mui/icons-material/Share'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import axios from 'axios'
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props
   return <IconButton {...other} />
@@ -26,29 +27,38 @@ const ExpandMore = styled((props) => {
   }),
 }))
 
-export default function JobCard() {
+export default function JobCard({ query }) {
+
   const [expanded, setExpanded] = useState(false)
   const [jobs, setJobs] = useState('')
+  console.log(query)
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
   useEffect(() => {
     async function fetchData() {
-      console.log('Fetching Job data!')
-      let fetchResult = await fetch('/job/api/jobs')
-      let JobList = await fetchResult.json()
-      console.log('JobList is:', JobList)
-      setJobs(JobList)
+      if (query) {
+        let fetchResult = await fetch('/job/search/'+query)
+        let JobList = await fetchResult.json()
+        console.log('JobList is:', JobList)
+        setJobs(JobList)
+      } else {
+        console.log(query)
+        console.log('Fetching Job data!')
+        let fetchResult = await fetch('/job/api/jobs')
+        let JobList = await fetchResult.json()
+        console.log('JobList is:', JobList)
+        setJobs(JobList)
+      }
     }
     fetchData()
-  }, [])
-
+  }, [query])
   return (
     <>
       {jobs &&
         jobs.map((job) => {
           return (
-            <Card key={job._id}>
+            <Card key={job._id} elevation={3} sx={{marginBottom:"1em", width:"100%"}}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="jobs">
@@ -62,7 +72,7 @@ export default function JobCard() {
                 }
                 title={job.Title || job.title}
                 subheader={job.Company || job.company}
-                //  skills = {job.skills || job.Skills}
+              //  skills = {job.skills || job.Skills}
               />
 
               <CardContent>
@@ -71,12 +81,12 @@ export default function JobCard() {
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {job.timestamps || job.Timestamps}
-                 </Typography>
+                </Typography>
                 <Typography>{job.skills || job.Skills} </Typography>
                 <Typography>{job.link || job.Link}</Typography>
-               
-                  
-               
+
+
+
               </CardContent>
               <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

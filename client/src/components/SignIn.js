@@ -14,6 +14,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+
 
 
 function Copyright(props) {
@@ -31,6 +33,7 @@ const theme = createTheme();
 export default function SignIn({setUser}) {
 
   const [inputs, setInputs] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -47,6 +50,7 @@ export default function SignIn({setUser}) {
     .then(function (response) {
       if(response.data)
         setUser(response.data)
+        navigate('/profile')
     })
   };
 

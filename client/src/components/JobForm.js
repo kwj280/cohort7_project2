@@ -1,266 +1,177 @@
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { makeStyles } from "@material-ui/core";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import AdapterDateFns from "@mui/lab/AdapterMoment";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import moment from "moment";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 
-//Initial values for each input in job form using Formik
-const INITIAL_FORM_STATE = {
-  Title: "",
-  Description: "",
-  skills: "",
-  Company: "",
-  Availability: null,
-  Expiry: null,
-  Link: "",
-};
+
 
 // Validation Schema with Yup
-const FORM_VALIDATION = Yup.object().shape({
-  Title: Yup.string().required("Required"),
-  Description: Yup.string().min(10, "Too Short").required("Required"),
+const validationSchema = Yup.object().shape({
+  title: Yup.string().required("Title Required"),
+  description: Yup.string().min(10, "Too short minimum of 10 characters required").required("Required"),
   skills: Yup.string().required("Required"),
-  Company: Yup.string().required("Required"),
-  Availability: Yup.string().required("Required"),
-  ExpiryDate: Yup.string().required("Required"),
-  Link: Yup.string().required("Required"),
+  company: Yup.string().required("Required"),
+  availability: Yup.date().required("Required"),
+  expiryDate: Yup.date().required("Required"),
+  link: Yup.string().url().required("Url Required"),
 });
 
 // Style Function
-
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: theme.spacing(2),
-
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "500px",
+    root: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: theme.spacing(2),
+  
+      "& .MuiTextField-root": {
+        margin: theme.spacing(1),
+        width: "500px",
+      },
+      "& .MuiButtonBase-root": {
+        margin: theme.spacing(2),
+      },
     },
-    "& .MuiButtonBase-root": {
-      margin: theme.spacing(2),
-    },
-  },
-}));
+  }));
 
 const JobForm = () => {
   const classes = useStyles();
 
-
-  //  Declaring use state variables for Title textbox
-  const [Title, setTitle] = useState("");
-  const [TitleTouched, setTitleTouched] = useState(false);
-  const TitleisValid = Title.trim() !== "";
-  const TitleInputisInvalid = !TitleisValid && TitleTouched;
-
-  // Declaring use state variables for Description textbox
-  const [Description, setDescription] = useState("");
-  const [DescriptionTouched, setDescriptionTouched] = useState(false);
-  const DescriptionisValid = Description.trim() !== "";
-  const DescriptionInputisInvalid = !DescriptionisValid && DescriptionTouched;
-
-  // Declaring use state variables Skills textbox
-  const [skills, setSkills] = useState("");
-  const [SkillsTouched, setSkillsTouched] = useState(false);
-  const SkillsisValid = skills.trim() !== "";
-  const SkillsInputisInvalid = !SkillsisValid && SkillsTouched;
-
-  // Declaring use state variable for Company textbox
-  const [Company, setCompany] = useState("");
-  const [CompanyTouched, setCompanyTouched] = useState(false);
-  const CompanyisValid = Company.trim() !== "";
-  const CompanyInputisInvalid = !CompanyisValid && CompanyTouched;
-
-  // Declaring use state variable for Availability textbox
-  const [Availability, setAvailability] = useState("");
-  //const [AvailabilityTouched, setAvailabilityTouched] = useState(false)
-  const AvailabilityisValid = Availability !== null;
-  const AvailabilityisInvalid = !AvailabilityisValid; //AvailabilityTouched;
-
-  // Declaring use state variable for ExpiryDate Textbox
-  const [ExpiryDate, setExpiryDate] = useState(null);
-  //const [ExpiryDateTouched, setExpiryDateTouched] = useState(false)
-  const ExpiryDateisValid = ExpiryDate !== null;
-  const ExpiryDateisInvalid = !ExpiryDateisValid; //ExpiryDateTouched;
-
-  // Declaring use state variables for Link Textbox
-  const [Link, setlink] = useState("");
-  const [LinkisTouched, setlinkTouched] = useState(false);
-  const LinkisValid = Link.trim() !== "";
-  const LinkisInvalid = !LinkisValid && LinkisTouched;
-
-  // Function to perform when text box is selected
-  const onBlur = (event, setter) => {
-    setter(true);
-  };
-
-  // Function to perform when text box is used
-  const onInputUpdate = (event, setter) => {
-    let updatedValue = event.target.value;
-    setter(updatedValue);
-  };
-  // Function to reset form after clicking submit
-  const reset = () => {
-    // Reset Title
-    setTitle("");
-    setTitleTouched(false);
-    // Reset Description
-    setDescription("");
-    setDescriptionTouched(false);
-    //Reset Skills
-    setSkills("");
-    setSkillsTouched(false);
-    //Reset Company
-    setCompany("");
-    setCompanyTouched(false);
-    //Reset Availability
-    setAvailability(null);
-    //setAvailabilityTouched(false);
-    //Reset Expiry Date
-    setExpiryDate(null);
-    //setExpiryDateTouched(false);
-    //Reset Link
-    setlink("");
-    setlinkTouched(false);
-  };
-
-  // Check to see the form has all the required fields before submitting
-  let formIsValid = false;
-  if (
-    TitleisValid &&
-    DescriptionisValid &&
-    SkillsisValid &&
-    CompanyisValid &&
-    AvailabilityisValid &&
-    ExpiryDateisValid &&
-    LinkisValid
-  ) {
-    formIsValid = true;
-  }
-
-  // Post data to the following endpoint '/job/submit' using axios instead of fetch
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios
-      .post("/job/post_jobs", {
-        title: Title,
-        description: Description,
-        skills,
-        company: Company,
-        availability: Availability,
-        expiryDate: ExpiryDate,
-        link: Link,
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      description: '',
+      company: '',
+      skills: '',
+      availability: new Date(),
+      expiryDate: null,
+      link: ''
+    },
+    validationSchema: validationSchema,
+     onSubmit: (values) => {
+      console.log("Form data", values)
+      axios({
+        method: 'post',
+        url: '/job/post_jobs',
+        data: values
       })
       .then(function (response) {
         console.log(response.data);
       });
-    reset();
-  };
+      formik.resetForm()
+    },
+  });
+
 
   return (
     <>
-      <Formik
-          initialValues={{ ...INITIAL_FORM_STATE }}
-          validationSchema={FORM_VALIDATION}
-          onSubmit={(values) => {
-            console.log("Hello");
-          }}
-        >
-          <Form className={classes.root}>
-            <TextField
-              name="Title"
+          <form className={classes.root} onSubmit={formik.handleSubmit}>
+          <TextField
+              id ="title"
+              name="title"
               label="Title"
               variant="outlined"
-              value={Title}
-              onBlur={(event) => onBlur(event, setTitleTouched)}
-              onChange={(event) => onInputUpdate(event, setTitle)}
-              helperText={TitleInputisInvalid ? "Enter Title" : null}
-            />
-            <TextField
-              name="Description"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.title && Boolean(formik.errors.title)}
+              helperText={formik.touched.title && formik.errors.title}
+          />
+          <TextField
+              id ="description"
+              name="description"
               label="Description"
               variant="outlined"
-              value={Description}
               multiline
               rows={5}
               maxrows={10}
-              onBlur={(event) => onBlur(event, setDescriptionTouched)}
-              onChange={(event) => onInputUpdate(event, setDescription)}
-              helperText={
-                DescriptionInputisInvalid ? "Enter Description" : null
-              }
-            />
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.description && Boolean(formik.errors.description)}
+              helperText={formik.touched.description && formik.errors.description}
+          />
             <TextField
+              id ="skills"
               name="skills"
               label="Skills"
               variant="outlined"
-              value={skills}
-              onBlur={(event) => onBlur(event, setSkillsTouched)}
-              onChange={(event) => onInputUpdate(event, setSkills)}
-              helperText={SkillsInputisInvalid ? "Enter Skills" : null}
-            />
-            <TextField
-              name="Company"
+              value={formik.values.skills}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.skills && Boolean(formik.errors.skills)}
+              helperText={formik.touched.skills && formik.errors.skills}
+          />
+          <TextField
+              id ="company"
+              name="company"
               label="Company"
               variant="outlined"
-              value={Company}
-              onBlur={(event) => onBlur(event, setCompanyTouched)}
-              onChange={(event) => onInputUpdate(event, setCompany)}
-              helperText={CompanyInputisInvalid ? "Enter Company" : null}
-            />
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              value={formik.values.company}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.company && Boolean(formik.errors.company)}
+              helperText={formik.touched.company && formik.errors.company}
+          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
-                name="Availability"
+                id="availability"
+                name="availability"
                 label="Availability"
-                value={Availability}
-                onChange={(newValue) => setAvailability(newValue)}
+                variant="outlined"
+                value= {formik.values.availability}
+                onChange = { value => formik.setFieldValue("availability", value)}
                 renderInput={(params) => <TextField {...params} />}
+                error={formik.touched.availability && Boolean(formik.errors.availability)}
+                helperText={formik.touched.availability && formik.errors.availability}
               />
               <DatePicker
-                name="Expiry"
+                id="expiryDate"
+                name="expiryDate"
                 label="Expiry Date"
-                value={ExpiryDate}
-                onChange={(newValue) => {
-                  setExpiryDate(newValue);
-                }}
+                inputVariant="outlined"
+                value={formik.values.expiryDate}
+                onChange= {value => formik.setFieldValue("expiryDate", value)}
+                onBlur= {value => formik.setFieldTouched("expiryDate",value )}
                 renderInput={(params) => <TextField {...params} />}
+                error={formik.touched.expiryDate && Boolean(formik.errors.expiryDate)}
+                helperText={formik.touched.expiryDate && formik.errors.expiryDate}
               />
             </LocalizationProvider>
+         
             <TextField
-              name="Link"
+              id ="link"
+              name="link"
               label="Link"
               variant="outlined"
-              value={Link}
-              onBlur={(event) => onBlur(event, setlinkTouched)}
-              onChange={(event) => onInputUpdate(event, setlink)}
-              helperText={LinkisInvalid ? "Enter Link" : null}
-            />
-            <div>
-              <Button variant="contained" color="secondary" onClick={reset}>
+              value={formik.values.link}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.link && Boolean(formik.errors.link)}
+              helperText={formik.touched.link && formik.errors.link}
+          />
+             <div>
+              <Button onClick={formik.resetForm} variant="contained" color="primary">
                 Cancel
               </Button>
               <Button
-                //onClick={handleSubmit}
                 type="Submit"
                 variant="contained"
-                color="primary"
-                disabled={!formIsValid}
+                color="secondary"
+                disabled={!formik.isValid} //|| formik.isSubmitting}
               >
                 Submit
               </Button>
             </div>
-            </Form>
-        </Formik>
+           
+          </form>
     </>
   );
 };

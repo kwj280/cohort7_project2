@@ -36,7 +36,6 @@ function MainContentBody() {
 
         <Route path="/post_jobs" element={<PostJobPage />} />
         <Route path="/applications" element={<ApplicationsPage />} />
-
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/signIn" element={<SignIn setUser={setUser}/>} />
 

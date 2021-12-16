@@ -10,23 +10,23 @@ import React from 'react'
 const Footer = () => {
 
   return (
-    <AppBar color="default" position="static" sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar color="inherit" position="static" sx={{ top: 'auto', bottom: 0 }}>
       <ToolBar>
         <List component="nav">
           <ListItem component="div">
             <ListItemText inset>
-              <Typography color="secondary" variant="subtitle1">
+              <Typography color="default" variant="subtitle1">
                 <Link to="/jobs">Find Jobs</Link>
               </Typography>
             </ListItemText>
             <ListItemText inset>
-              <Typography color="secondary" variant="subtitle1">
+              <Typography color="default" variant="subtitle1">
                 <Link to="/company/reviews">Company Reviews</Link>
               </Typography>
             </ListItemText>
 
             <ListItemText inset>
-              <Typography color="secondary" variant="subtitle1">
+              <Typography color="default" variant="subtitle1">
                 <Link to="/company/salaries">Company Salaries</Link>
               </Typography>
             </ListItemText>

@@ -58,7 +58,7 @@ export default function JobCard({ query }) {
       {jobs &&
         jobs.map((job) => {
           return (
-            <Card key={job._id} elevation={3} sx={{marginBottom:"1em", width:"100%"}}>
+            <Card key={job._id} elevation={3} sx={{marginBottom:"1em", width:"50%"}}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="jobs">
@@ -67,7 +67,7 @@ export default function JobCard({ query }) {
                 }
                 action={
                   <IconButton aria-label="settings">
-                    <MoreVertIcon />
+                    {/* <MoreVertIcon /> */}
                   </IconButton>
                 }
                 title={job.Title || job.title}
@@ -80,22 +80,25 @@ export default function JobCard({ query }) {
                   {job.Description || job.description}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {job.timestamps || job.Timestamps}
+                  {job.timestamps.toString() || job.Timestamps.toString()}
                 </Typography>
                 <Typography>{job.skills || job.Skills} </Typography>
-                <Typography>{job.link || job.Link}</Typography>
+                <Typography color="text.primary">
+                  <a href={job.link}>`{job.link}`</a>
+                 
+                </Typography>
 
 
 
               </CardContent>
               <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                {/* <IconButton aria-label="add to favorites">
                   <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
                   <ShareIcon />
-                </IconButton>
-                <Typography>Learn More</Typography>
+                </IconButton> */}
+                {/* <Typography>Learn More</Typography> */}
                 <ExpandMore
                   expand={expanded}
                   onClick={handleExpandClick}

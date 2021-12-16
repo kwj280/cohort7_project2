@@ -18,11 +18,6 @@ router.post('/post_jobs', async (req, res) => {
   }
 })
 
-router.get('/:id', async (req, res) => {
-  let id = req.params.id
-  let jobs = await jobsModel.getJobByJobId(id)
-  res.send(jobs)
-})
 
 router.post('/jobs/submit', async (req, res) => {
   let job = req.body
@@ -35,9 +30,22 @@ router.post('/jobs/submit', async (req, res) => {
 //   res.send(JobList)
 // })
 router.get('/api/jobs', async (req, res) => {
-  let jobs =  await jobsModel.getJobs()
+  let jobs = await jobsModel.getJobs()
   res.send(jobs)
   console.log(jobs)
 })
 
+
+router.get('/search/:query', async (req, res) => {
+  console.log(req.params)
+  let jobs = await jobsModel.jobModel.find({$or: [{ 'title': { $regex: `${req.params.query}`, $options: 'i' } },
+                                                   { 'description': { $regex: `${req.params.query}`, $options: 'i' } }]})
+  res.send(jobs)
+})
+
+router.get('/:id', async (req, res) => {
+  let id = req.params.id
+  let jobs = await jobsModel.getJobByJobId(id)
+  res.send(jobs)
+})
 module.exports = router

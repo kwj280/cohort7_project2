@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 
 function Copyright(props) {
@@ -32,10 +33,12 @@ const theme = createTheme();
 export default function SignUp() {
 
   const [inputs, setInputs] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
+
     setInputs(values => ({...values, [name]: value}))
   }
 
@@ -45,7 +48,8 @@ export default function SignUp() {
       inputs
     })
     .then(function (response) {
-      console.log(response);
+      if(response.status === 200)
+        navigate('/signIn')
     })
   };
 

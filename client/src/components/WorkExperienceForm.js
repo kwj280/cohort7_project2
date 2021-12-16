@@ -37,12 +37,22 @@ const WorkExperienceForm = ({ profile, setProfile }) => {
   const [workExperiences, setWorkExperiences] = useState([])
   const [deleteButtonVisible, setDeleteButtonVisible] = useState(-1)
   const [toggleWorkExperinceChanged,setToggleWorkExperinceChanged ] = useState(false)
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   useEffect(() => {
     if (profile) {
       axios.get('/profile/workExperience/' + profile._id).then(res => {
-        if (res.data)
-          setWorkExperiences(res.data)
+        if (res.data){
+          let workExperiences = res.data
+          workExperiences.sort((a, b)=> {
+            let dateA = new Date(a.dateFrom)
+            let dateB = new Date(b.dateFrom)
+            return dateA.getFullYear() === dateB.getFullYear()? dateB.getMonth() - dateA.getMonth() :  dateB.getFullYear() - dateA.getFullYear() 
+          })
+          console.log(workExperiences)
+          setWorkExperiences(workExperiences)
+
+        }
       })
     }
   }, [profile, toggleWorkExperinceChanged])
@@ -113,6 +123,7 @@ const WorkExperienceForm = ({ profile, setProfile }) => {
                     <DesktopDatePicker
                       label="From"
                       value={dateFrom}
+                      views={['year', 'month']}
                       onChange={(newValue) => handleInputChange(newValue, setDateFrom)}
                       renderInput={(params) => <TextField {...params} />}
                     />
@@ -123,6 +134,7 @@ const WorkExperienceForm = ({ profile, setProfile }) => {
                       <DesktopDatePicker
                         label="To"
                         value={dateTo}
+                        views={['year', 'month']}
                         onChange={(newValue) => handleInputChange(newValue, setDateTo)}
                         renderInput={(params) => <TextField {...params} />}
                       />
@@ -170,13 +182,15 @@ const WorkExperienceForm = ({ profile, setProfile }) => {
           </Grid>
           <Grid container xs={12} item>
             {workExperiences?.map((work, index) => {
+              let dateFrom = new Date(work.dateFrom)
+              let dateTo = new Date(work.dateTo)
+
               return (
                 <Grid item xs={12} key={work._id}
                   onMouseEnter={() => { setDeleteButtonVisible(index) }}
                   onMouseLeave={() => { setDeleteButtonVisible(-1) }}
                 >
-                  <Divider component="div" />
-                  
+                  <Divider component="div" sx={{marginBottom: '1em'}}/>
                   <Typography variant='subtitle1' display="inline" > <b>{work.title}</b></Typography>
                   <Button sx={{ paddingY: '0px' }} sx={{float: 'right'}} onClick={()=>{deleteWorkExperience(work._id)}} >
                     {deleteButtonVisible === index && <CloseIcon />}
@@ -184,7 +198,7 @@ const WorkExperienceForm = ({ profile, setProfile }) => {
                   <br/>
                   <Typography variant='body'>{work.company}</Typography>
                   &nbsp;&nbsp;&nbsp;
-                  <Typography variant='overline' gutterBottom>{new Date(work.dateFrom).toISOString().split('T')[0]} - {work.present ? 'Present' : new Date(work.dateTo).toISOString().split('T')[0]}</Typography>
+                  <Typography variant='overline' gutterBottom>{months[dateFrom.getMonth()] + ' ' + dateFrom.getFullYear()} - {work.present ? 'Present' : months[dateTo.getMonth()] + ' ' + dateTo.getFullYear()}</Typography>
                   <Typography mb={2} variant='body' component="div">{work.description}</Typography>
 
 

@@ -68,4 +68,9 @@ const findById = async (id) => {
   return user;
 };
 
-module.exports = { userModel, addUser, signIn, findByUserEmail, findById };
+const updateUser = async (id, newUser) => {
+  let user = await userModel.findByIdAndUpdate(id, newUser);
+  return user;
+};
+
+module.exports = { updateUser, userModel, addUser, signIn, findByUserEmail, findById };

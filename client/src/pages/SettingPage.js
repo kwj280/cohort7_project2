@@ -70,7 +70,6 @@ export default function SettingPage({ user }) {
             container
             justifyContent="center"
             alignItems="center"
-            justifyContent="center"
             rowSpacing={2}
             columnSpacing={2}
           >

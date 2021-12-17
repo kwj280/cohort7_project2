@@ -102,7 +102,7 @@ export default function SettingPage({ user }) {
                 </Grid>
                 <Grid item xs={12} container justifyContent="center">
                   <Typography variant="p" sx={{ paddingX: "12px" }}>
-                    <strong>Password:</strong> {password.length} characters long
+                    <strong>Password:</strong> {password?.length} characters long
                   </Typography>
                 </Grid>
                 <Grid item xs={12} container justifyContent="center">

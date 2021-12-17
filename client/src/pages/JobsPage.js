@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-const JobGrid = () => {
+const JobsPage = () => {
   const [jobs, setJobs] = useState('')
   const inputQuery = useRef()
   const [query, setQuery] = useState(useParams().q)
@@ -69,4 +69,4 @@ const JobGrid = () => {
   )
 }
 
-export default JobGrid
+export default JobsPage

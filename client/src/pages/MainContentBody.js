@@ -2,8 +2,8 @@ import {useEffect, useState} from 'react'
 import { Routes, Route } from 'react-router-dom'
 import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
-import LandingPage from './JobsPage'
-import JobsPage from './LandingPage'
+import LandingPage from './LandingPage'
+import JobsPage from './JobsPage'
 import ProfilePage from './ProfilePage'
 import MyApplicationPage from './MyApplicationsPage'
 import SettingPage from './SettingPage'
@@ -26,9 +26,9 @@ function MainContentBody() {
   return (  
     <>
       <Routes>
-        <Route path="/" element={<JobsPage />} />
-        <Route path="/jobs" element={<LandingPage />} />
-        <Route path="/jobs/:q" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/jobs" element={<JobsPage />} />
+        <Route path="/jobs/:q" element={<JobsPage />} />
 
         <Route path="/profile" element={<ProfilePage  setUser={setUser} user={user}/>} />
         <Route path="/my_applications" element={<MyApplicationPage />} />

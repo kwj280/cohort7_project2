@@ -31,7 +31,6 @@ export default function JobCard({ query }) {
 
   const [expanded, setExpanded] = useState(false)
   const [jobs, setJobs] = useState('')
-  console.log(query)
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
@@ -58,7 +57,7 @@ export default function JobCard({ query }) {
       {jobs &&
         jobs.map((job) => {
           return (
-            <Card key={job._id} elevation={3} sx={{marginBottom:"1em", width:"50%"}}>
+            <Card key={job._id} elevation={3} sx={{marginBottom:"1em", marginRight:"1em", width:"45%"}}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="jobs">
@@ -80,11 +79,11 @@ export default function JobCard({ query }) {
                   {job.Description || job.description}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {job.timestamps.toString() || job.Timestamps.toString()}
+                  {job.timestamps?.toString() || job.Timestamps?.toString()}
                 </Typography>
                 <Typography>{job.skills || job.Skills} </Typography>
                 <Typography color="text.primary">
-                  <a href={job.link}>`{job.link}`</a>
+                  <a href={job.link}>{job.link}</a>
                  
                 </Typography>
 

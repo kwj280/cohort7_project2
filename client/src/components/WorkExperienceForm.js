@@ -49,7 +49,6 @@ const WorkExperienceForm = ({ profile, setProfile }) => {
             let dateB = new Date(b.dateFrom)
             return dateA.getFullYear() === dateB.getFullYear()? dateB.getMonth() - dateA.getMonth() :  dateB.getFullYear() - dateA.getFullYear() 
           })
-          console.log(workExperiences)
           setWorkExperiences(workExperiences)
 
         }
@@ -78,7 +77,6 @@ const WorkExperienceForm = ({ profile, setProfile }) => {
       setToggleWorkExperinceChanged((prev)=>!prev)
     })
   }
-
 
   const deleteWorkExperience = (id)=>{
     axios.delete('/profile/workExperience/'+id).then(res=>{
@@ -136,7 +134,7 @@ const WorkExperienceForm = ({ profile, setProfile }) => {
                         value={dateTo}
                         views={['year', 'month']}
                         onChange={(newValue) => handleInputChange(newValue, setDateTo)}
-                        renderInput={(params) => <TextField {...params} />}
+                        renderInput={(params) => <TextField {...params}/>}
                       />
                       :
                       <Typography sx={{ textAlign: 'center' }}>Present</Typography>}

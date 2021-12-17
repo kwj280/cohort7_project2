@@ -32,8 +32,6 @@ const ProfileForm = ({ user }) => {
   const [profile, setProfile] = useState(null);
   const [image, _setImage] = useState(null);
   const profileImg = useRef(null)
-  const [firstName, setFirstName] = useState(user?.firstName ?? '')
-  const [lastName, setLastName] = useState(user?.lastName ?? '')
 
 
 

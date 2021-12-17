@@ -36,8 +36,8 @@ const LinksForm = ({ profile, setProfile }) => {
 
   useEffect(() => {
     if (profile) {
-      setLinkLinkedIn(profile.linkLinkedIn)
-      setLinkGit(profile.linkGit)
+      setLinkLinkedIn(profile.linkLinkedIn?? '')
+      setLinkGit(profile.linkGit?? '')
     }
   }, [profile])
 
